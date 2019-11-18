@@ -1,4 +1,5 @@
 import React from 'react';
+import './UserProfile.css'
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -7,7 +8,7 @@ import React from 'react';
 
 const UserProfile = () => (
   <div>
-    <p>
+    <p className="profile-header">
       Profile Page
     </p>
   </div>
