@@ -11,9 +11,7 @@
 }
 
 .burger-icon-container {
-    padding-top: 10px;
-    width: 20%;
-    float: right;
+    background-color: lightcyan;
 }
 
 .header-title {
@@ -32,4 +30,11 @@
 
 .logout-button {
     padding-bottom: 1vh;
+}
+
+.burger-menu-container {
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    z-index: 0;
 }
