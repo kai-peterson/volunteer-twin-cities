@@ -11,3 +11,15 @@ body {
 .log-in:hover, .log-out:hover, .register:hover {
   background-color: #008183;
 }
+
+input {
+    width: 50vw;
+    height: 20px;
+    border: 1px solid black;
+}
+
+.app-grid-container {
+    display: inline-grid;
+    grid-template-columns: 80vw 20vw;
+    grid-template-rows: 8vh 92vh;
+}

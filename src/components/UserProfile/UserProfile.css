@@ -1,3 +1,40 @@
-.profile-header {
-    display: inline-block;
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
 }
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    grid-column-start: 1;
+    grid-column-end: span col2-start;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    margin: 0 auto;
+}
+
+.profile-username {
+    text-align: center;
+    margin: 10px 0px;
+}
+
+.profile-button {
+    max-width: 40vw;
+    padding: 10px 20px !important;
+    margin: 2vh 4vw !important;
+}
+
+/* .profile-header {
+    background-color: lightcyan;
+    font-size: 29px;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    margin: 0;
+    padding-top: 1.8vh;
+    padding-left: 2vw;
+    float: left;
+} */

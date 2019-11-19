@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className="app-grid-container">
           {this.props.user.id && <DrawerNav dispatch={this.props.dispatch} />}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}

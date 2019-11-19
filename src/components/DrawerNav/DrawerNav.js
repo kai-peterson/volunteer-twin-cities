@@ -66,7 +66,7 @@ function DrawerNav(props) {
     );
     
     return (
-        <span>
+        <span className="burger-menu-container">
             <span className="burger-icon-container" >
                 <Button onClick={toggleDrawer('right', true)}><img className="burger-icon" src="images/burger-menu-icon.png" alt="burger drawer icon" /></Button>
             </span>

@@ -1,0 +1,9 @@
+.organization-list {
+    max-height: 38vh;
+    overflow: scroll;
+    margin-top: 10px;
+    margin-bottom: 2vh;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    border: 2px solid black;
+}
