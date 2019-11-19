@@ -15,6 +15,7 @@ import './DrawerNav.css'
 const useStyles = makeStyles({
     list: {
         width: 250,
+        overflow: 'hidden',
     },
     fullList: {
         width: 'auto',
