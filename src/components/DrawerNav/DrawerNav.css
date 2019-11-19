@@ -14,6 +14,10 @@
     background-color: lightcyan;
 }
 
+.MuiDrawer-paperAnchorRight {
+    overflow: hidden;
+}
+
 .header-title {
     justify-self: flex-start;
 }
