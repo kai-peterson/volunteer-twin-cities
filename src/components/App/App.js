@@ -12,7 +12,7 @@ import DrawerNav from '../DrawerNav/DrawerNav'
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
-import OrganizationList from '../OrganizationList/OrganizationList';
+import MainListView from '../MainListView/MainListView';
 import UserProfile from '../UserProfile/UserProfile';
 
 import './App.css';
@@ -39,7 +39,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/home"
-              component={OrganizationList}
+              component={MainListView}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}

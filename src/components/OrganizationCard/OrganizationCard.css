@@ -1,0 +1,24 @@
+.organization-image {
+    max-height: 20vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.organization-image-container {
+    width: 95%;
+    padding-top: 15px;
+    margin: 0;
+}
+
+.MuiCardActionArea-root {
+    height: 95%;
+}
+
+.MuiCard-root {
+    border: 2px solid black;
+    min-width: 150px;
+    min-height: max-content;
+    height: fit-content;
+    margin-top: 3vh;
+}

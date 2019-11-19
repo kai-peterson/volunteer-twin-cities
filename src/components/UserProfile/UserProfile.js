@@ -12,7 +12,7 @@ import OrganizationListView from '../OrganizationListView/OrganizationListView'
 
 const UserProfile = (props) => (
   <div className="profile-container">
-    <img className="profile-pic" src={props.user.profile_pic} />
+    <img className="profile-pic" src={props.user.profile_pic} alt=""/>
     <h1 className="profile-username">{props.user.username}</h1>
     <h2>Upcoming events:</h2>
     <OrganizationListView />
