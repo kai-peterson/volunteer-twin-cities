@@ -19,7 +19,7 @@ class MainListView extends Component {
           Volunteer Twin Cities
         </h1>
         <div className="organization-card">
-          {this.props.setOrgsReducer.map( (org) => 
+          {this.props.orgsInfoReducer.setOrgsReducer.map( (org) => 
             <OrganizationCard org={org}/>
           )}
         </div>

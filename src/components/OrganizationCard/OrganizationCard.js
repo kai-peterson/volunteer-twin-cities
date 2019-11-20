@@ -1,4 +1,6 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -22,10 +24,16 @@ const useStyles = makeStyles({
 function OrganizationCard(props) {
     const classes = useStyles();
 
+    const handleClick = () => {
+        props.dispatch({type: 'GET_ORG_DETAILS', payload: props.org.id})
+        props.dispatch({type: 'GET_ORG_IMAGES', payload: props.org.id})
+        props.history.push(`/home/details/${props.org.id}`);
+    }
+
     return (
         <Card className={classes.card}>
             <CardActionArea>
-                <CardContent>
+                <CardContent onClick={handleClick}>
                     <img className="organization-image" src={props.org.image} alt="volunteer organization" />
                     <hr/>
                     <Typography gutterBottom variant="h5" component="h2">
@@ -40,4 +48,4 @@ function OrganizationCard(props) {
     );
 }
 
-export default OrganizationCard;
+export default withRouter(connect()(OrganizationCard));

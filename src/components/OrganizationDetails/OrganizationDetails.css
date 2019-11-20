@@ -1,0 +1,46 @@
+.details-container {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    grid-column: 1;
+    grid-column-end: span col2-start;
+    grid-row-start: 2;
+    grid-row-end: span2;
+}
+
+.details-nav-container {
+    grid-column: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    padding-top: 13px;
+    margin-right: 3vw;
+}
+
+.details-header {
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.details-type {
+    font-style: italic;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.details-subheader {
+    margin-bottom: 0;
+}
+
+.details-body {
+    max-height: 8.8vh;
+    overflow: scroll;
+}
+
+.MuiBottomNavigation-root {
+    max-width: 100%;
+}
+
+/* .carousel-container {
+    max-height: 35vh;
+} */

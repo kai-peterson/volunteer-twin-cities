@@ -1,0 +1,8 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    grid-column: 1;
+    grid-column-end: span col2-start;
+    grid-row-start: 1;
+    grid-row-end: span2;
+}
