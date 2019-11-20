@@ -1,0 +1,26 @@
+.carousel-container {
+    margin: 0 auto;
+    background-color: white;
+}
+
+.carousel.carousel-slider {
+    max-height: 35vh;
+    padding-top: 15px;
+}
+
+.carousel-image {
+    max-height: 35vh;
+}
+
+.carousel .slide img {
+    width: unset !important;
+}
+
+.carousel .slider-wrapper.axis-horizontal .slider .slide {
+    background-color: white;
+}
+
+.carousel .control-dots {
+    margin: 0;
+    padding: 0;
+}
