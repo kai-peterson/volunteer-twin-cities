@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+
 const setOrgsReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_ORGS':
@@ -7,4 +9,16 @@ const setOrgsReducer = (state = [], action) => {
     }
 };
 
-export default setOrgsReducer;
+const orgDetailsReducer = (state = {}, action) => {
+    switch (action.type) {
+        case 'SET_ORG_DETAILS':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+export default combineReducers({
+    setOrgsReducer,
+    orgDetailsReducer,
+  });

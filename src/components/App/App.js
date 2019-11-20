@@ -14,6 +14,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import MainListView from '../MainListView/MainListView';
 import UserProfile from '../UserProfile/UserProfile';
+import OrganizationDetails from '../OrganizationDetails/OrganizationDetails'
 
 import './App.css';
 
@@ -47,6 +48,11 @@ class App extends Component {
               exact
               path="/profile"
               component={UserProfile}
+            />
+            <ProtectedRoute
+              exact
+              path="/home/details/:id"
+              component={OrganizationDetails}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
