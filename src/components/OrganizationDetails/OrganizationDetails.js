@@ -8,6 +8,7 @@ import ImageCarousel from '../ImageCarousel/ImageCarousel';
 class OrganizationDetails extends Component {
     componentDidMount() {
         this.props.dispatch({ type: 'GET_ORG_DETAILS', payload: this.props.match.params.id })
+        this.props.dispatch({ type: 'GET_ORG_IMAGES', payload: this.props.match.params.id})
     }
 
     render() {

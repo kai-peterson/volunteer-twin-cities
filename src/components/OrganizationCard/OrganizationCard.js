@@ -26,6 +26,7 @@ function OrganizationCard(props) {
 
     const handleClick = () => {
         props.dispatch({type: 'GET_ORG_DETAILS', payload: props.org.id})
+        props.dispatch({type: 'GET_ORG_IMAGES', payload: props.org.id})
         props.history.push(`/home/details/${props.org.id}`);
     }
 
