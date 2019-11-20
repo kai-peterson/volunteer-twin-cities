@@ -18,7 +18,17 @@ const orgDetailsReducer = (state = {}, action) => {
     }
 }
 
+const orgImagesReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_ORG_IMAGES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     setOrgsReducer,
     orgDetailsReducer,
+    orgImagesReducer
   });

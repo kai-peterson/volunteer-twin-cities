@@ -1,15 +1,20 @@
 .carousel-container {
     margin: 0 auto;
     background-color: white;
+    min-height: 35vh;
+    display: flex;
+    align-items: center;
 }
 
 .carousel.carousel-slider {
     max-height: 35vh;
-    padding-top: 15px;
+    margin-top: 15px;
 }
 
 .carousel-image {
     max-height: 35vh;
+    max-width: 100%;
+    border: 2px solid black;
 }
 
 .carousel .slide img {
