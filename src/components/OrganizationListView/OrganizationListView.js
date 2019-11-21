@@ -14,43 +14,18 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function OrganizationListView() {
+export default function OrganizationListView(props) {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <div className="organization-list">
+            <div className="organization-list" style={props.style}>
                 <List component="nav" aria-label="upcoming events list">
-                    <ListItem button>
-                        <ListItemText primary="Event Name #1" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Event Name #2" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Event Name #1" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Event Name #2" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Event Name #1" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Event Name #2" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Event Name #1" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Event Name #2" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Event Name #1" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Event Name #2" />
-                    </ListItem>
+                    {props.listItems.map((item) => 
+                        <ListItem button onClick={() => props.handleClick(item.id)}>
+                            <ListItemText primary={item.name} />
+                        </ListItem>
+                    )}
                 </List>
             </div>
         </div>

@@ -5,6 +5,7 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
+import './App.css';
 
 import { connect } from 'react-redux';
 
@@ -14,9 +15,10 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import MainListView from '../MainListView/MainListView';
 import UserProfile from '../UserProfile/UserProfile';
-import OrganizationDetails from '../OrganizationDetails/OrganizationDetails'
-
-import './App.css';
+import OrganizationDetails from '../OrganizationDetails/OrganizationDetails';
+import CreateOrgView from '../CreateOrgView/CreateOrgView';
+import ManageOrgsView from '../ManageOrgsView/ManageOrgsView';
+import OrganizationProfile from '../OrganizationProfile/OrganizationProfile';
 
 class App extends Component {
   componentDidMount() {
@@ -53,6 +55,21 @@ class App extends Component {
               exact
               path="/home/details/:id"
               component={OrganizationDetails}
+            />
+            <ProtectedRoute
+              exact
+              path="/profile/create"
+              component={CreateOrgView}
+            />
+            <ProtectedRoute
+              exact
+              path="/profile/manage"
+              component={ManageOrgsView}
+            />
+            <ProtectedRoute
+              exact
+              path="/profile/manage/organization/:id"
+              component={OrganizationProfile}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

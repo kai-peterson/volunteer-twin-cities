@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 import './UserProfile.css'
 
 import { Button } from '@material-ui/core'
@@ -15,10 +16,10 @@ const UserProfile = (props) => (
     <img className="profile-pic" src={props.user.profile_pic} alt=""/>
     <h1 className="profile-username">{props.user.username}</h1>
     <h2>Upcoming events:</h2>
-    <OrganizationListView />
+    <OrganizationListView style={{maxHeight: '38vh'}} listItems={[{name: 'a'}, {name: 'a'}, {name: 'a'}, {name: 'a'}, {name: 'a'}, {name: 'a'}, {name: 'a'}, {name: 'a'},]}/>
     <div className="profile-buttons-container">
-      <Button className="profile-button" variant="contained">Create Organization</Button>
-      <Button className="profile-button" variant="contained">Manage Organizations</Button>
+      <Button onClick={() => props.history.push('/profile/create')} className="profile-button" variant="contained">Create Organization</Button>
+      <Button onClick={() => props.history.push('/profile/manage')} className="profile-button" variant="contained">Manage Organizations</Button>
     </div>
     {/* <pre>{JSON.stringify(props.user, null, 2)}</pre> */}
   </div>
@@ -28,4 +29,4 @@ const mapReduxStateToProps = reduxState => {
   return reduxState
 }
 
-export default connect(mapReduxStateToProps)(UserProfile);
+export default withRouter(connect(mapReduxStateToProps)(UserProfile));
