@@ -43,11 +43,15 @@ class LoginPage extends Component {
           </h2>
         )}
         <form onSubmit={this.login}>
-          <h1>Login</h1>
-          <div>
+          <div className="login-logo-container">
+            <img className="login-logo" src="images/sun-icon.png" />
+          </div>
+          <h1 className="login-header">Login</h1>
+          <div className="login-input-container">
             <label htmlFor="username">
-              Username:
+              <p>Username</p>
               <input
+                className="login-input"
                 type="text"
                 name="username"
                 value={this.state.username}
@@ -55,10 +59,11 @@ class LoginPage extends Component {
               />
             </label>
           </div>
-          <div>
+          <div className="login-input-container">
             <label htmlFor="password">
-              Password:
+              <p>Password</p>
               <input
+                className="login-input"
                 type="password"
                 name="password"
                 value={this.state.password}
@@ -66,9 +71,9 @@ class LoginPage extends Component {
               />
             </label>
           </div>
-          <div>
+          <div className="login-input-container">
             <input
-              className="log-in"
+              className="login-submit"
               type="submit"
               name="submit"
               value="Log In"
@@ -77,9 +82,9 @@ class LoginPage extends Component {
         </form>
         <center>
           <button
+            className="login-input-container login-switch-button link-button"
             type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
+            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
           >
             Register
           </button>
