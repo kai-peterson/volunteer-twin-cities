@@ -5,6 +5,9 @@ import userSaga from './userSaga';
 import orgsSaga from './getOrgsSaga';
 import orgDetailsSaga from './orgDetailsSaga';
 import getImagesRootSaga from './orgImagesSaga';
+import createOrgRootSaga from './createOrgSaga';
+import manageOrgsRootSaga from './manageOrgsSaga';
+import updateOrgRootSaga from './updateOrgSaga'
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +24,8 @@ export default function* rootSaga() {
     orgsSaga(),
     orgDetailsSaga(),
     getImagesRootSaga(),
+    createOrgRootSaga(),
+    manageOrgsRootSaga(),
+    updateOrgRootSaga(),
   ]);
 }

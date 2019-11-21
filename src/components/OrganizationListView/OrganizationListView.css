@@ -1,5 +1,5 @@
 .organization-list {
-    max-height: 38vh;
+    /* max-height: 38vh; */
     overflow: scroll;
     margin-top: 10px;
     margin-bottom: 2vh;

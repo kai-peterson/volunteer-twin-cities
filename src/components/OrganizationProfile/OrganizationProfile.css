@@ -1,0 +1,42 @@
+.org-profile-container {
+    padding: 20px;
+    padding-bottom: 40px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    grid-column-start: 1;
+    grid-column-end: span col2;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    margin: 0 auto;
+    width: 90%;
+}
+
+.edit-button {
+    margin-top: 30px !important;
+}
+
+.org-edit-textarea {
+    width: 100%;
+    height: 60px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.org-edit-header,
+.org-edit-subheader {
+    width: 90%;
+    height: fit-content;
+    margin: 15px 0;
+    padding: 10px;
+}
+
+.org-edit-header {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.org-edit-subheader {
+    font-size: 16px;
+}

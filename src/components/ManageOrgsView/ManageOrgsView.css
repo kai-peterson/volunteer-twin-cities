@@ -1,0 +1,17 @@
+.organization-list-container {
+    display: flex;
+    grid-column-start: 1;
+    grid-column-end: span col2-start;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    justify-content: center;
+    margin-top: 3vh;
+    height: fit-content;
+    /* align-items: center; */
+}
+
+.manage-orgs-header {
+    font-size: 27px;
+    margin-left: 2vw;
+    margin-top: 22px;
+}

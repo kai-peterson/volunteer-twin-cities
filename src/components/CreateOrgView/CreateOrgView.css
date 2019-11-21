@@ -1,0 +1,46 @@
+.create-org-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    grid-column-start: 1;
+    grid-column-end: span col2-start;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    margin-left: 8vw;
+}
+
+.create-org-header {
+    /* grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 1; */
+    font-size: 29px;
+    margin-left: 4vw;
+    margin-top: 22px;
+}
+
+.create-org-subheader {
+    justify-self: flex-start;
+    margin: 20px 0;
+    margin-bottom: 18px;
+}
+
+.create-org-input,
+.create-org-textarea {
+    width: 85%;
+    border: 1px solid black;
+}
+
+.create-org-textarea {
+    height: 60px;
+}
+
+.create-org-submit {
+    position: absolute;
+    bottom: 4vh;
+    left: 40vw;
+    width: 20vw;
+    height: 5vh;
+    border: 2px solid black;
+    margin: 0 auto;
+}
