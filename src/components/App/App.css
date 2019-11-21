@@ -13,7 +13,6 @@ body {
 }
 
 input {
-    width: 50vw;
     height: 20px;
     border: 1px solid black;
 }

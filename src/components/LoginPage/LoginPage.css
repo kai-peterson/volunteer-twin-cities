@@ -1,8 +1,46 @@
 .login-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     grid-column: 1;
     grid-column-end: span col2-start;
     grid-row-start: 1;
     grid-row-end: span2;
+}
+
+.login-header {
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 15px; 
+}
+
+.login-input-container {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.login-logo {
+    height: 15vh;
+    margin-top: 5vh;
+}
+
+.login-logo-container {
+    display: flex;
+    justify-content: center;
+}
+
+.login-input {
+    padding: 3px;
+    font-size: 20px;
+}
+
+.login-submit {
+    padding: 5px;
+    width: 100px;
+    height: 40px;
+}
+
+.login-switch-button {
+    padding: 5px;
 }
