@@ -42,8 +42,6 @@ router.get('/details/:id', (req, res) => {
 router.put('/details/:id', rejectUnauthenticated,(req, res) => {
     const queryText = `UPDATE orgs SET "name"=$1, "type"=$2, "address"=$3, "intro"=$4, "mission"=$5, "message"=$6 WHERE id=$7`;
     const queryInfo = [req.body.name, req.body.type, req.body.address, req.body.intro, req.body.mission, req.body.message, req.params.id]
-    console.log('HIT DETAILS PUT ROUTE');
-    
     pool.query(queryText, queryInfo)
         .then( (result) => {
             res.sendStatus(200) 
@@ -55,8 +53,6 @@ router.put('/details/:id', rejectUnauthenticated,(req, res) => {
 });
 
 router.get('/details/images/:id', (req, res) => {
-    console.log('HIT IMAGES ROUTE', req.params.id);
-    
     const queryText = `SELECT image FROM org_images WHERE org_id=$1`;
     pool.query(queryText, [req.params.id])
         .then( (result) => {
