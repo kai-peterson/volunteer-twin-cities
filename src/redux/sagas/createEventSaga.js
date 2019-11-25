@@ -3,7 +3,6 @@ import axios from 'axios';
 
 function* createEventSaga(action) {
   try {
-      console.log('in CREATE EVENT saga', action.payload);
       yield axios.post(`/api/orgs/profile/create/event`, action.payload);
       yield put({type: 'GET_ORG_EVENTS', payload: action.payload.org_id})
   } catch (error) {
@@ -14,8 +13,6 @@ function* createEventSaga(action) {
 function* getOrgEventsSaga(action) {
     try {
         const orgEvents = yield axios.get(`/api/orgs/events/${action.payload}`);
-        yield console.log(orgEvents);
-        
         yield put({type: 'SET_ORG_EVENTS', payload: orgEvents.data})
     }
     catch (error) {

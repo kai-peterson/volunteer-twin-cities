@@ -3,7 +3,6 @@ import axios from 'axios';
 
 function* createOrgSaga(action) {
   try {
-      console.log('in CREATE ORG saga', action.payload);
       yield axios.post(`/api/orgs/profile/create/org`, action.payload)
       yield put({type: 'GET_USER_ORGS'})
   } catch (error) {

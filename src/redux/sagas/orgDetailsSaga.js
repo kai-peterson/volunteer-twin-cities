@@ -3,8 +3,6 @@ import axios from 'axios';
 
 function* orgDetailsSaga(action) {
   try {
-      console.log('in ORG DETAILS saga', action.payload);
-      
       const orgDetails = yield axios.get(`/api/orgs/details/${action.payload}`) 
       yield put({type: 'SET_ORG_DETAILS', payload: orgDetails.data[0]})
       

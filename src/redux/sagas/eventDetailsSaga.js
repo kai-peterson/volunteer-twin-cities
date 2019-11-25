@@ -3,7 +3,6 @@ import axios from 'axios';
 
 function* eventDetailsSaga(action) {
   try {
-      console.log('in EVENT DETAILS saga', action.payload);
       const eventDetails = yield axios.get(`/api/orgs/event/details/${action.payload}`);
       yield put({type: 'SET_EVENT_DETAILS', payload: eventDetails.data[0]})
   } catch (error) {

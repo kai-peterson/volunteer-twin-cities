@@ -4,7 +4,6 @@ import axios from 'axios';
 function* orgImagesSaga(action) {
   try {
       const orgImages = yield axios.get(`/api/orgs/details/images/${action.payload}`) 
-      yield console.log('in ORG IMAGES saga', orgImages);
       yield put({type: 'SET_ORG_IMAGES', payload: orgImages.data})
 
   } catch (error) {
