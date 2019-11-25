@@ -17,7 +17,7 @@ class ManageOrgsView extends Component {
     render() {
         return (
             <>
-                <h1 className="manage-orgs-header">Manage Events</h1>
+                <h1 className="manage-orgs-header" style={this.props.style}>Manage Events</h1>
                 <div className="organization-list-container">
                     <OrganizationListView style={{ height: '100%' }} listItems={this.props.eventsRootReducer.eventsReducer} handleClick={this.handleClick} />
                 </div>

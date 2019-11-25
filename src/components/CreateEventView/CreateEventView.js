@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import './CreateEventView.css';
 
 class CreateEventView extends Component {
@@ -12,7 +14,9 @@ class CreateEventView extends Component {
             start: '',
             end: '',
             req: '',
-        }
+        },
+        startDate: new Date(),
+        endDate: new Date()
     }
 
     handleChange = (propertyName, event) => {
@@ -24,8 +28,14 @@ class CreateEventView extends Component {
         })
     }
 
+    handleDateChange = (date) => {
+        this.setState({
+            startDate: date
+        })
+    }
+
     handleClick = () => {
-        this.props.dispatch({type: 'CREATE_EVENT', payload: this.state.event})
+        this.props.dispatch({ type: 'CREATE_EVENT', payload: this.state.event })
         this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}/manage/events`)
     }
 
@@ -35,18 +45,30 @@ class CreateEventView extends Component {
                 <h1 className="create-org-header">Create Event</h1>
                 <div className="create-org-container">
                     <h4 className="create-org-subheader">Name</h4>
-                    <input className="create-org-input" onChange={(event) => this.handleChange('name', event)} type="text" placeholder="Event name" value={this.state.event.name}/>
+                    <input className="create-org-input" onChange={(event) => this.handleChange('name', event)} type="text" placeholder="Event name" value={this.state.event.name} />
                     <h4 className="create-org-subheader">Description</h4>
-                    <input className="create-org-input" onChange={(event) => this.handleChange('description', event)} type="text" placeholder="Event description" value={this.state.event.type}/>
+                    <input className="create-org-input" onChange={(event) => this.handleChange('description', event)} type="text" placeholder="Event description" value={this.state.event.type} />
                     <h4 className="create-org-subheader">Start Date/Time</h4>
-                    <input className="create-org-input" onChange={(event) => this.handleChange('start', event)} type="text" placeholder="(i.e. 11/20/2019 - 3:00pm)" value={this.state.event.address}/>
+                    <DatePicker
+                        selected={this.state.startDate}
+                        // onSelect={this.handleDateChange}
+                        onChange={this.handleDateChange}
+                        showTimeSelect
+                        dateFormat="Pp"
+                    />
                     <h4 className="create-org-subheader">End Date/Time</h4>
-                    <input className="create-org-input" onChange={(event) => this.handleChange('end', event)} type="text" placeholder="(i.e. 11/20/2019 - 8:00pm)" value={this.state.event.intro}/>
+                    <DatePicker
+                        selected={this.state.startDate}
+                        // onSelect={this.handleDateChange}
+                        onChange={this.handleDateChange}
+                        showTimeSelect
+                        dateFormat="Pp"
+                    />
                     <h4 className="create-org-subheader">Restrictions/Requirements</h4>
-                    <input className="create-org-input" onChange={(event) => this.handleChange('reqs', event)} type="text" placeholder="Any restrictions or requirements for event" value={this.state.event.mission}/>
+                    <input className="create-org-input" onChange={(event) => this.handleChange('reqs', event)} type="text" placeholder="Any restrictions or requirements for event" value={this.state.event.mission} />
                 </div>
                 <button className="create-org-submit" onClick={this.handleClick}>SUBMIT</button>
-                {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
+                {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
             </>
         );
     }

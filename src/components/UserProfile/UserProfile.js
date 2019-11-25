@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import './UserProfile.css'
@@ -11,19 +11,31 @@ import OrganizationListView from '../OrganizationListView/OrganizationListView'
 // It doesn't dispatch any redux actions or display any part of redux state
 // or even care what the redux state is, so it doesn't need 'connect()'
 
-const UserProfile = (props) => (
-  <div className="profile-container">
-    <img className="profile-pic" src={props.user.profile_pic} alt=""/>
-    <h1 className="profile-username">{props.user.username}</h1>
-    <h2>Upcoming events:</h2>
-    <OrganizationListView style={{maxHeight: '38vh'}} listItems={[{name: 'a'}, {name: 'a'}, {name: 'a'}, {name: 'a'}, {name: 'a'}, {name: 'a'}, {name: 'a'}, {name: 'a'},]}/>
-    <div className="profile-buttons-container">
-      <Button onClick={() => props.history.push('/profile/create')} className="profile-button" variant="contained">Create Organization</Button>
-      <Button onClick={() => props.history.push('/profile/manage')} className="profile-button" variant="contained">Manage Organizations</Button>
-    </div>
-    {/* <pre>{JSON.stringify(props.user, null, 2)}</pre> */}
-  </div>
-);
+class UserProfile extends Component {
+  componentDidMount() {
+    this.props.dispatch({type: 'GET_USER_EVENTS'})
+  }
+
+  handleClick = () => {
+    
+  }
+
+  render() {
+    return (
+      <div className="profile-container">
+        <img className="profile-pic" src={this.props.user.profile_pic} alt="" />
+        <h1 className="profile-username">{this.props.user.username}</h1>
+        <h2>Upcoming events:</h2>
+        <OrganizationListView style={{ height: '38vh' }} listItems={this.props.eventsRootReducer.userEventsReducer} handleClick={this.handleClick}/>
+        <div className="profile-buttons-container">
+          <Button onClick={() => this.props.history.push('/profile/create')} className="profile-button" variant="contained">Create Organization</Button>
+          <Button onClick={() => this.props.history.push('/profile/manage')} className="profile-button" variant="contained">Manage Organizations</Button>
+        </div>
+        {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
+      </div>
+    )
+  }
+};
 
 const mapReduxStateToProps = reduxState => {
   return reduxState

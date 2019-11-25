@@ -22,6 +22,7 @@ import OrganizationProfile from '../OrganizationProfile/OrganizationProfile';
 import CreateEventView from '../CreateEventView/CreateEventView';
 import ManageOrgEvents from '../ManageOrgEvents/ManageOrgEvents';
 import EventDetails from '../EventDetails/EventDetails';
+import EventSignUp from '../EventSignUp/EventSignUp';
 
 class App extends Component {
   componentDidMount() {
@@ -58,6 +59,11 @@ class App extends Component {
               exact
               path="/home/details/:id"
               component={OrganizationDetails}
+            />
+            <ProtectedRoute
+              exact
+              path="/home/details/:id/event/:event_id"
+              component={EventSignUp}
             />
             <ProtectedRoute
               exact

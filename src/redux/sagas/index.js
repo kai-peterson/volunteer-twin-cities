@@ -11,6 +11,7 @@ import updateOrgRootSaga from './updateOrgSaga';
 import createEventRootSaga from './createEventSaga';
 import orgImageRootSaga from './addOrgImageSaga';
 import eventDetailsRootSaga from './eventDetailsSaga';
+import userEventRootSaga from './userEventSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -33,5 +34,6 @@ export default function* rootSaga() {
     createEventRootSaga(),
     orgImageRootSaga(),
     eventDetailsRootSaga(),
+    userEventRootSaga(),
   ]);
 }

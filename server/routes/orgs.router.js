@@ -51,6 +51,23 @@ router.get('/events/:id', (req, res) => {
         })
 });
 
+router.get('/user/events', (req, res) => {
+    const queryText = `SELECT "events"."name", events.event_description, events.event_start, 
+                            events.event_end, events.reqs, orgs.name as org_name FROM events 
+                            JOIN users_events ON events.id=users_events.event_id 
+                            JOIN orgs ON orgs.id=events.org_id 
+                            WHERE user_id=$1`;
+    pool.query(queryText, [req.user.id])
+        .then( (result) => {
+            res.send(result.rows);  
+        })
+        .catch( (error) => {
+            console.log('error in /api/orgs/user/events route', error);
+            res.sendStatus(501)
+        })
+});
+
+
 router.get('/event/details/:id', (req, res) => {
     const queryText = `SELECT * FROM "events" WHERE "id"=$1`;
     console.log('in EVENT DETAILS route', req.params.id);
@@ -60,6 +77,20 @@ router.get('/event/details/:id', (req, res) => {
         })
         .catch( (error) => {
             console.log('error in /api/orgs/event/details route', error);
+            res.sendStatus(501)
+        })
+});
+
+router.post('/event/signup/:event_id', (req, res) => {
+    console.log('hit');
+    
+    const queryText = `INSERT INTO users_events (user_id, event_id) VALUES ($1, $2)`;
+    pool.query(queryText, [req.user.id, req.params.event_id])
+        .then( (result) => {
+            res.sendStatus(200)
+        })
+        .catch( (error) => {
+            console.log('error in /event/signup/:event_id route', error);
             res.sendStatus(501)
         })
 });
