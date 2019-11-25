@@ -11,12 +11,10 @@ class CreateEventView extends Component {
             org_id: this.props.match.params.id,
             name: '',
             description: '',
-            start: '',
-            end: '',
+            start: new Date(),
+            end: new Date(),
             req: '',
         },
-        startDate: new Date(),
-        endDate: new Date()
     }
 
     handleChange = (propertyName, event) => {
@@ -28,9 +26,12 @@ class CreateEventView extends Component {
         })
     }
 
-    handleDateChange = (date) => {
+    handleDateChange = (prop, date) => {
         this.setState({
-            startDate: date
+            event: {
+                ...this.state.event,
+                [prop]: date
+            }
         })
     }
 
@@ -50,17 +51,17 @@ class CreateEventView extends Component {
                     <input className="create-org-input" onChange={(event) => this.handleChange('description', event)} type="text" placeholder="Event description" value={this.state.event.type} />
                     <h4 className="create-org-subheader">Start Date/Time</h4>
                     <DatePicker
-                        selected={this.state.startDate}
-                        // onSelect={this.handleDateChange}
-                        onChange={this.handleDateChange}
+                        selected={this.state.event.start}
+                        onSelect={(date) => this.handleDateChange('start', date)}
+                        onChange={(date) => this.handleDateChange('start', date)}
                         showTimeSelect
                         dateFormat="Pp"
                     />
                     <h4 className="create-org-subheader">End Date/Time</h4>
                     <DatePicker
-                        selected={this.state.startDate}
-                        // onSelect={this.handleDateChange}
-                        onChange={this.handleDateChange}
+                        selected={this.state.event.end}
+                        onSelect={(date) => this.handleDateChange('end', date)}
+                        onChange={(date) => this.handleDateChange('end', date)}
                         showTimeSelect
                         dateFormat="Pp"
                     />
