@@ -116,6 +116,22 @@ router.get('/event/details/:id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+router.put('/event/update/:event_id', rejectUnauthenticated, (req, res) => {
+    console.log('hit update route', req.body);
+    
+    const queryText = `UPDATE events SET "name"=$1, "event_description"=$2, "event_start"=$3, "event_end"=$4, "reqs"=$5, "address"=$6 WHERE id=$7`;
+    const queryInfo = [req.body.name, req.body.description, req.body.start, req.body.end, req.body.reqs, req.body.address, req.params.event_id]
+    pool.query(queryText, queryInfo)
+        .then((result) => {
+            res.sendStatus(200)
+        })
+        .catch((error) => {
+            console.log('error in /api/orgs/details route', error);
+            res.sendStatus(501)
+        })
+});
+
+
 router.post('/event/signup/:event_id', (req, res) => {
     console.log('hit');
 
@@ -169,8 +185,8 @@ router.post('/profile/create/org', rejectUnauthenticated, (req, res) => {
 })
 
 router.post('/profile/create/event', rejectUnauthenticated, (req, res) => {
-    const queryText = `INSERT INTO events ("org_id", "name", "event_description", "event_start", "event_end", "reqs") VALUES ($1, $2, $3, $4, $5, $6)`
-    const queryInfo = [req.body.org_id, req.body.name, req.body.description, req.body.start, req.body.end, req.body.reqs];
+    const queryText = `INSERT INTO events ("org_id", "name", "event_description", "event_start", "event_end", "reqs", "address") VALUES ($1, $2, $3, $4, $5, $6, $7)`
+    const queryInfo = [req.body.org_id, req.body.name, req.body.description, req.body.start, req.body.end, req.body.reqs, req.body.address];
     pool.query(queryText, queryInfo)
         .then((result) => {
             res.sendStatus(200)

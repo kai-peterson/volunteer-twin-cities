@@ -36,11 +36,21 @@ function* deleteEventSaga(action) {
   }
 }
 
+function* updateEventSaga(action) {
+  try {
+      yield axios.put(`/api/orgs/event/update/${action.payload.event_id}`, action.payload);
+      yield put({type: 'GET_EVENT_DETAILS', payload: action.payload.event_id})
+  } catch (error) {
+      console.log('Error in updateEventSaga', error);
+  }
+}
+
 function* userEventRootSaga() {
   yield takeLatest('GET_USER_EVENTS', getUserEventsSaga);
   yield takeLatest('ADD_USER_EVENT', addUserEventSaga);
   yield takeLatest('GET_EVENT_USERS', getEventUsersSaga);
   yield takeLatest('DELETE_EVENT', deleteEventSaga);
+  yield takeLatest('UPDATE_EVENT', updateEventSaga);
 }
 
 export default userEventRootSaga;

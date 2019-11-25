@@ -13,6 +13,7 @@ class CreateEventView extends Component {
             description: '',
             start: new Date(),
             end: new Date(),
+            address: '',
             req: '',
         },
     }
@@ -49,6 +50,8 @@ class CreateEventView extends Component {
                     <input className="create-org-input" onChange={(event) => this.handleChange('name', event)} type="text" placeholder="Event name" value={this.state.event.name} />
                     <h4 className="create-org-subheader">Description</h4>
                     <input className="create-org-input" onChange={(event) => this.handleChange('description', event)} type="text" placeholder="Event description" value={this.state.event.type} />
+                    <h4 className="create-org-subheader">Event Address</h4>
+                    <input className="create-org-input" onChange={(event) => this.handleChange('address', event)} type="text" placeholder="Event address" value={this.state.event.address} />
                     <h4 className="create-org-subheader">Start Date/Time</h4>
                     <DatePicker
                         selected={this.state.event.start}
