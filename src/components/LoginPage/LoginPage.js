@@ -44,7 +44,7 @@ class LoginPage extends Component {
         )}
         <form onSubmit={this.login}>
           <div className="login-logo-container">
-            <img className="login-logo" src="images/sun-icon.png" />
+            <img className="login-logo" src="images/sun-icon.png" alt="sun icon logo" />
           </div>
           <h1 className="login-header">Login</h1>
           <div className="login-input-container">

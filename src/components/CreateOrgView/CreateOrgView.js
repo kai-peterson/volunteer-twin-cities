@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './CreateOrgView.css'
-import axios from 'axios';
+import './CreateOrgView.css';
 
 class CreateOrgView extends Component {
     state = {

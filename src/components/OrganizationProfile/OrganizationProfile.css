@@ -40,3 +40,26 @@
 .org-edit-subheader {
     font-size: 16px;
 }
+
+.upload-image-input {
+    width: 80vw;
+    padding: 4px;
+    margin: 3px;
+}
+
+.upload-image-button {
+    width: 30vw;
+    max-height: 35px;
+    margin-top: 10px !important;
+    margin-bottom: 20px !important;
+    border: 1px solid black;
+}
+
+.upload-image-container {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    max-width: 100%;
+    margin-top: 10px;
+}

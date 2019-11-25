@@ -18,3 +18,7 @@
     margin: 0 auto;
     margin-top: 2vh;
 }
+
+.MuiCardContent-root  { 
+    width: 310px;
+}

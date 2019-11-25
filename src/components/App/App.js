@@ -19,6 +19,9 @@ import OrganizationDetails from '../OrganizationDetails/OrganizationDetails';
 import CreateOrgView from '../CreateOrgView/CreateOrgView';
 import ManageOrgsView from '../ManageOrgsView/ManageOrgsView';
 import OrganizationProfile from '../OrganizationProfile/OrganizationProfile';
+import CreateEventView from '../CreateEventView/CreateEventView';
+import ManageOrgEvents from '../ManageOrgEvents/ManageOrgEvents';
+import EventDetails from '../EventDetails/EventDetails';
 
 class App extends Component {
   componentDidMount() {
@@ -70,6 +73,21 @@ class App extends Component {
               exact
               path="/profile/manage/organization/:id"
               component={OrganizationProfile}
+            />
+            <ProtectedRoute
+              exact
+              path="/profile/manage/organization/:id/create/event"
+              component={CreateEventView}
+            />
+            <ProtectedRoute
+              exact
+              path="/profile/manage/organization/:id/manage/events"
+              component={ManageOrgEvents}
+            />
+            <ProtectedRoute
+              exact
+              path="/profile/manage/organization/:id/manage/events/:event_id"
+              component={EventDetails}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

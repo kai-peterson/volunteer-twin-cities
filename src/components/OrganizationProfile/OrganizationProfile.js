@@ -5,11 +5,6 @@ import './OrganizationProfile.css'
 
 import { Button } from '@material-ui/core'
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
-
 class OrganizationProfile extends Component {
     state = {
         orgInfo: {
@@ -20,13 +15,14 @@ class OrganizationProfile extends Component {
             mission: '',
             message: '',
         },
+        image: '',
         mode: false,
     }
 
     componentDidMount() {
         this.props.dispatch({ type: 'GET_ORG_DETAILS', payload: this.props.match.params.id })
     }
-    
+
     handleChange = (prop, event) => {
         this.setState({
             orgInfo: {
@@ -34,6 +30,20 @@ class OrganizationProfile extends Component {
                 [prop]: event.target.value
             }
         })
+    }
+
+    handleClick = () => {
+        this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}/create/event`)
+    }
+
+    handleImageChange = (event) => {
+        this.setState({
+            image: event.target.value
+        })
+    }
+
+    handleImageClick = () => {
+        this.props.dispatch({type: 'ADD_ORG_IMAGE', payload: {id: this.props.match.params.id, image: this.state.image}})
     }
 
     switchToEditMode = () => {
@@ -51,7 +61,7 @@ class OrganizationProfile extends Component {
     }
 
     switchBack = () => {
-        this.props.dispatch({type: 'UPDATE_ORG', payload: {id: this.props.orgsInfoReducer.orgDetailsReducer.id, ...this.state.orgInfo}})
+        this.props.dispatch({ type: 'UPDATE_ORG', payload: { id: this.props.orgsInfoReducer.orgDetailsReducer.id, ...this.state.orgInfo } })
         this.setState({
             mode: false,
         })
@@ -64,12 +74,16 @@ class OrganizationProfile extends Component {
                     <div className="org-profile-container">
                         <img className="profile-pic" src={this.props.user.profile_pic} alt="" />
                         <h1 className="profile-username">{this.props.orgsInfoReducer.orgDetailsReducer.name}</h1>
+                        <div className="upload-image-container">
+                            <input onChange={this.handleImageChange} value={this.state.image} className="upload-image-input" type="text" placeholder="Image link" />
+                            <Button onClick={this.handleImageClick} variant="outlined" size="small" className="upload-image-button">Add Image</Button>
+                        </div>
                         <h4>{this.props.orgsInfoReducer.orgDetailsReducer.type}</h4>
                         <h4>{this.props.orgsInfoReducer.orgDetailsReducer.address}</h4>
                         <h3>Events:</h3>
                         <div className="profile-buttons-container">
-                            <Button className="profile-button" variant="contained">Create</Button>
-                            <Button className="profile-button" variant="contained">Manage</Button>
+                            <Button onClick={() => this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}/create/event`)} className="profile-button" variant="contained">Create</Button>
+                            <Button onClick={() => this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}/manage/events`)} className="profile-button" variant="contained">Manage</Button>
                         </div>
                         <h4>Intro</h4>
                         <p className="create-org-subheader">{this.props.orgsInfoReducer.orgDetailsReducer.intro}</p>
@@ -77,8 +91,7 @@ class OrganizationProfile extends Component {
                         <p className="create-org-subheader">{this.props.orgsInfoReducer.orgDetailsReducer.mission}</p>
                         <h4>Message</h4>
                         <p className="create-org-subheader">{this.props.orgsInfoReducer.orgDetailsReducer.message}</p>
-                        <h4 className="create-org-subheader">Images</h4>
-                        <input className="create-org-input" type="text" placeholder="Image link" />
+                        {/* <h4 className="create-org-subheader">Add image</h4> */}
                         <Button onClick={this.switchToEditMode} className="profile-button edit-button" variant="outlined">Edit</Button>
                         {/* <pre>{JSON.stringify(props.user, null, 2)}</pre> */}
                     </div>
@@ -87,6 +100,10 @@ class OrganizationProfile extends Component {
                     <div className="org-profile-container">
                         <img className="profile-pic" src={this.props.user.profile_pic} alt="" />
                         <input onChange={(event) => this.handleChange('name', event)} className="org-edit-header" value={this.state.orgInfo.name} />
+                        <div className="upload-image-container">
+                            <input onChange={this.handleImageChange} value={this.state.image} className="upload-image-input" type="text" placeholder="Image link" />
+                            <Button onClick={this.handleImageClick} variant="outlined" size="small" className="upload-image-button">Add Image</Button>
+                        </div>
                         <input onChange={(event) => this.handleChange('type', event)} className="org-edit-subheader" value={this.state.orgInfo.type} />
                         <input onChange={(event) => this.handleChange('address', event)} className="org-edit-subheader" value={this.state.orgInfo.address} />
                         <h3>Events:</h3>
@@ -100,9 +117,7 @@ class OrganizationProfile extends Component {
                         <textarea onChange={(event) => this.handleChange('mission', event)} className="org-edit-textarea" value={this.state.orgInfo.mission} />
                         <h4>Message</h4>
                         <textarea onChange={(event) => this.handleChange('message', event)} className="org-edit-textarea" value={this.state.orgInfo.message} />
-                        <h4 className="create-org-subheader">Images</h4>
-                        <input className="create-org-input" type="text" placeholder="Image link" />
-                        <Button onClick={this.switchBack}className="profile-button edit-button" variant="outlined">Save</Button>
+                        <Button onClick={this.switchBack} className="profile-button edit-button" variant="outlined">Save</Button>
                         {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
                     </div>
                 }

@@ -11,7 +11,7 @@ class ImageCarousel extends Component {
                 <Carousel interval={5000} dynamicHeight showStatus={false} infiniteLoop={true} showThumbs={false} width='330px'>
                     {this.props.orgsInfoReducer.orgImagesReducer.length ? this.props.orgsInfoReducer.orgImagesReducer.map((image) =>
                         <div className="carousel-image-container">
-                            <img className="carousel-image" src={image.image} />
+                            <img className="carousel-image" src={image.image} alt="placeholder"/>
                         </div>) :
                         <pre>Loading...</pre>
                     }
