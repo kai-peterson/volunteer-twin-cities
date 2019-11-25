@@ -28,9 +28,19 @@ class CreateEventView extends Component {
         })
     }
 
-    handleDateChange = (date) => {
+    handleDateChange = (prop, date) => {
+        // if (prop === 'start') {
+        //     this.setState({
+        //         startDate: date
+        //     })
+        // }
+        // else if (prop === 'end') {
+        //     this.setState({
+        //         endDate: date
+        //     })
+        // }
         this.setState({
-            startDate: date
+            [prop]: date
         })
     }
 
@@ -52,15 +62,15 @@ class CreateEventView extends Component {
                     <DatePicker
                         selected={this.state.startDate}
                         // onSelect={this.handleDateChange}
-                        onChange={this.handleDateChange}
+                        onChange={(date) => this.handleDateChange('startDate', date)}
                         showTimeSelect
                         dateFormat="Pp"
                     />
                     <h4 className="create-org-subheader">End Date/Time</h4>
                     <DatePicker
-                        selected={this.state.startDate}
+                        selected={this.state.endDate}
                         // onSelect={this.handleDateChange}
-                        onChange={this.handleDateChange}
+                        onChange={(date) => this.handleDateChange('endDate', date)}
                         showTimeSelect
                         dateFormat="Pp"
                     />

@@ -18,9 +18,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/register', (req, res, next) => {  
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
-
-  const queryText = 'INSERT INTO "user" (username, password, full_name, profile_pic) VALUES ($1, $2, $3, $4) RETURNING id';
-  pool.query(queryText, [username, password, 'a', 'images/profpic.jpg'])
+  const email = req.body.email
+  console.log('hit register route', req.body);
+  
+  const queryText = 'INSERT INTO "user" (username, password, email, profile_pic) VALUES ($1, $2, $3, $4) RETURNING id';
+  pool.query(queryText, [username, password, email, 'images/profpic.jpg'])
     .then(() => res.sendStatus(201))
     .catch(() => res.sendStatus(500));
 });

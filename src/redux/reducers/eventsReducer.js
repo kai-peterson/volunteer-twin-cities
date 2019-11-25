@@ -18,6 +18,15 @@ const userEventsReducer = (state = [], action) => {
     }
 };
 
+const eventUsersReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_EVENT_USERS':
+            return action.payload;
+        default:
+            return state;
+    }
+};
+
 const eventDetailsReducer = (state = {}, action) => {
     switch (action.type) {
         case 'SET_EVENT_DETAILS':
@@ -30,5 +39,6 @@ const eventDetailsReducer = (state = {}, action) => {
 export default combineReducers({
     eventsReducer,
     userEventsReducer,
-    eventDetailsReducer
+    eventDetailsReducer,
+    eventUsersReducer,
 });

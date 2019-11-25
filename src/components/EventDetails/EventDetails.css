@@ -13,3 +13,8 @@
 .event-details-org-header {
     margin-left: 3vw;
 }
+
+.action-button {
+    width: 20vw;
+    margin: 0px 10px !important;
+}
