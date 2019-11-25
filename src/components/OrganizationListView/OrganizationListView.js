@@ -21,8 +21,8 @@ export default function OrganizationListView(props) {
         <div className={classes.root}>
             <div className="organization-list" style={props.style}>
                 <List component="nav" aria-label="upcoming events list">
-                    {props.listItems.map((item) => 
-                        <ListItem button onClick={() => props.handleClick(item.id)}>
+                    {props.listItems.map((item, i) => 
+                        <ListItem key={i} button onClick={() => props.handleClick(item.id)}>
                             <ListItemText primary={item.name} />
                         </ListItem>
                     )}

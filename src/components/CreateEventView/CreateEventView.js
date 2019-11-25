@@ -1,64 +1,81 @@
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import './CreateEventView.css';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import './CreateEventView.css';
 
-// class CreateEventView extends Component {
-//     state = {
-//         organization: {
-//             name: '',
-//             type: '',
-//             address: '',
-//             intro: '',
-//             mission: '',
-//             message: '',
-//             image: '',
-//         }
-//     }
+class CreateEventView extends Component {
+    state = {
+        event: {
+            org_id: this.props.match.params.id,
+            name: '',
+            description: '',
+            start: '',
+            end: '',
+            req: '',
+        },
+        startDate: new Date(),
+        endDate: new Date()
+    }
 
-//     handleChange = (propertyName, event) => {
-//         this.setState({
-//             organization: {
-//                 ...this.state.organization,
-//                 [propertyName]: event.target.value
-//             }
-//         })
-//     }
+    handleChange = (propertyName, event) => {
+        this.setState({
+            event: {
+                ...this.state.event,
+                [propertyName]: event.target.value
+            }
+        })
+    }
 
-//     handleClick = (orgObject) => {
-//         this.props.dispatch({type: 'CREATE_ORG', payload: orgObject})
-//         this.props.history.push('/profile/manage')
-//     }
+    handleDateChange = (date) => {
+        this.setState({
+            startDate: date
+        })
+    }
 
-//     render() {
-//         return (
-//             <>
-//                 <h1 className="create-org-header">Create Event</h1>
-//                 <div className="create-org-container">
-//                     <h4 className="create-org-subheader">Name</h4>
-//                     <input className="create-org-input" onChange={(event) => this.handleChange('name', event)} type="text" placeholder="Organiation Name" value={this.state.organization.name}/>
-//                     <h4 className="create-org-subheader">Type</h4>
-//                     <input className="create-org-input" onChange={(event) => this.handleChange('type', event)} type="text" placeholder="(i.e. Non-profit, community, school)" value={this.state.organization.type}/>
-//                     <h4 className="create-org-subheader">Address</h4>
-//                     <input className="create-org-input" onChange={(event) => this.handleChange('address', event)} type="text" placeholder="Address" value={this.state.organization.address}/>
-//                     <h4 className="create-org-subheader">Intro</h4>
-//                     <textarea className="create-org-input" onChange={(event) => this.handleChange('intro', event)} type="text" placeholder="Short intro introducing the organization" value={this.state.organization.intro}/>
-//                     <h4 className="create-org-subheader">Mission Statement</h4>
-//                     <textarea className="create-org-textarea" onChange={(event) => this.handleChange('mission', event)} type="text" placeholder="Mission Statement" value={this.state.organization.mission}/>
-//                     <h4 className="create-org-subheader">Message to Volunteers</h4>
-//                     <textarea className="create-org-textarea" onChange={(event) => this.handleChange('message', event)} type="text" placeholder="Message to volunteers (what can they expect)" value={this.state.organization.message}/>
-//                     <h4 className="create-org-subheader">Images</h4>
-//                     <input className="create-org-input" onChange={(event) => this.handleChange('image', event)} type="text" placeholder="Image link" value={this.state.organization.image}/>
-//                     {/* <button className="create-org-submit" onClick={() => {}}>SUBMIT</button> */}
-//                 </div>
-//                 <button className="create-org-submit" onClick={() => this.handleClick(this.state.organization)}>SUBMIT</button>
-//                 {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
-//             </>
-//         );
-//     }
-// };
+    handleClick = () => {
+        this.props.dispatch({ type: 'CREATE_EVENT', payload: this.state.event })
+        this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}/manage/events`)
+    }
 
-// const mapReduxStateToProps = reduxState => {
-//     return reduxState
-// }
+    render() {
+        return (
+            <>
+                <h1 className="create-org-header">Create Event</h1>
+                <div className="create-org-container">
+                    <h4 className="create-org-subheader">Name</h4>
+                    <input className="create-org-input" onChange={(event) => this.handleChange('name', event)} type="text" placeholder="Event name" value={this.state.event.name} />
+                    <h4 className="create-org-subheader">Description</h4>
+                    <input className="create-org-input" onChange={(event) => this.handleChange('description', event)} type="text" placeholder="Event description" value={this.state.event.type} />
+                    <h4 className="create-org-subheader">Start Date/Time</h4>
+                    <DatePicker
+                        selected={this.state.startDate}
+                        // onSelect={this.handleDateChange}
+                        onChange={this.handleDateChange}
+                        showTimeSelect
+                        dateFormat="Pp"
+                    />
+                    <h4 className="create-org-subheader">End Date/Time</h4>
+                    <DatePicker
+                        selected={this.state.startDate}
+                        // onSelect={this.handleDateChange}
+                        onChange={this.handleDateChange}
+                        showTimeSelect
+                        dateFormat="Pp"
+                    />
+                    <h4 className="create-org-subheader">Restrictions/Requirements</h4>
+                    <input className="create-org-input" onChange={(event) => this.handleChange('reqs', event)} type="text" placeholder="Any restrictions or requirements for event" value={this.state.event.mission} />
+                </div>
+                <button className="create-org-submit" onClick={this.handleClick}>SUBMIT</button>
+                {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
+            </>
+        );
+    }
+};
 
-// export default connect(mapReduxStateToProps)(CreateEventView);
+const mapReduxStateToProps = reduxState => {
+    return reduxState
+}
+
+export default withRouter(connect(mapReduxStateToProps)(CreateEventView));

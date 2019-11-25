@@ -1,0 +1,15 @@
+.event_details-container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    margin-top: 50px;
+    align-items: center;
+    grid-column-start: 1;
+    grid-column-end: span2;
+    grid-row-start: 2;
+    grid-row-end: 2;
+}
+
+.event-details-org-header {
+    margin-left: 3vw;
+}
