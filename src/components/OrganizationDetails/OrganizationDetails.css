@@ -41,6 +41,20 @@
     max-width: 100%;
 }
 
+.location-container {
+    display: flex;
+    flex-direction: column;
+    grid-column: 1;
+    grid-column-end: span col2-start;
+    grid-row-start: 2;
+    grid-row-end: 2;
+}
+
+.directions-link {
+    position: absolute;
+    bottom: 7vh;
+}
+
 /* .carousel-container {
     max-height: 35vh;
 } */

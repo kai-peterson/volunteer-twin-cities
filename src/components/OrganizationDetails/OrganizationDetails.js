@@ -6,6 +6,7 @@ import './OrganizationDetails.css'
 import DetailsNavBar from '../DetailsNavBar/DetailsNavBar';
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
 import OrganizationListView from '../OrganizationListView/OrganizationListView';
+import Map from '../Map/Map'
 
 class OrganizationDetails extends Component {
     componentDidMount() {
@@ -49,11 +50,12 @@ class OrganizationDetails extends Component {
                     </div>
                 }
                 {this.props.detailsNavReducer === 2 &&
-                    <>
+                    <div className="location-container">
                         <h2>Address: {this.props.orgsInfoReducer.orgDetailsReducer.address}</h2>
-                        <br/>
-                        <pre>{JSON.stringify(this.props, null, 2)}</pre>
-                    </>
+                        <Map address={this.props.orgsInfoReducer.orgDetailsReducer.address}/>
+                        <a className="directions-link" href="http://localhost:3000/#/home">Click here for Directions in Google Maps</a>
+                        {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
+                    </div>
 
                 }
             </>

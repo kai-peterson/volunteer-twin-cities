@@ -51,7 +51,7 @@ router.get('/events/:id', (req, res) => {
         })
 });
 
-router.get('/user/events', (req, res) => {
+router.get('/user/events', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT "events"."name", events.event_description, events.event_start, 
                             events.event_end, events.reqs, orgs.name as org_name FROM events 
                             JOIN users_events ON events.id=users_events.event_id 
