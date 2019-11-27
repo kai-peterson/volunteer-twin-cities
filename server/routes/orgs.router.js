@@ -219,7 +219,7 @@ router.post('/images/:id', rejectUnauthenticated, (req, res) => {
 // loop through event start times, if event start time - 1 day is >= the current date then...
 // log something for now
 // eventually call the gmail api to send an email to the owner of event
-const job = new CronJob('*/5 * * * * *', function () {
+const job = new CronJob('0 */30 * * * *', function () {
     const d = new Date();
     // return all events in a 30 minute period 24 hours before the event_start date/time
     const queryText = `SELECT events.id as event_id, events."name" as event_name, event_start, events.address as event_address, 
@@ -240,9 +240,10 @@ const job = new CronJob('*/5 * * * * *', function () {
                                             WHERE event_id=$1`
                 pool.query(queryTextUsers, [event.event_id])
                     .then( (result) => {
-                        const volunteers = result.rows.map( (volunteer) => {
-                            return volunteer.name + ': ' + volunteer.email + '<br/>'
-                        })
+                        let volunteers = ''
+                        result.rows.forEach( (volunteer) => 
+                            volunteers += `<li>Name: ${volunteer.name}<br/>Email: ${volunteer.email}</li><br/><br/>`
+                        )
                         console.log(result.rows);
                         console.log(volunteers);
                         
@@ -250,9 +251,12 @@ const job = new CronJob('*/5 * * * * *', function () {
                         const message = {
                             to: 'pete9372@umn.edu',
                             from: 'kai.m.peterson@gmail.com',
-                            subject: 'Volunteers for Upcoming Event',
+                            subject: `Volunteers for Upcoming Event: ${event.event_name}`,
                             text: `organization: ${event.org_name}, name: ${event.event_name}, address: ${event.event_address}, volunteers: ${volunteers}`,
-                            html: `<br/><p>organization: ${event.org_name}, name: ${event.event_name}, address: ${event.event_address}, <br/> volunteers: ${volunteers}</p>`,
+                            html: `<p><b>Organization:</b> ${event.org_name}<br/><br/>
+                                        <b>Event:</b> ${event.event_name}<br/><br/>
+                                        <b>Address:</b> ${event.event_address}<br/><br/>
+                                        <b>Volunteers Signed-up:</b><br/><br/><ul>${volunteers}</ul></p>`,
                         }
                         sgMail.send(message)
                     })
