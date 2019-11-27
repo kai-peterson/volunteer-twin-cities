@@ -25,23 +25,25 @@ class OrganizationDetails extends Component {
 
     render() {
         return (
-            <>
+            <div className="full-details-container">
+                <h1 className="details-header">
+                    {this.props.orgsInfoReducer.orgDetailsReducer.name}
+                </h1>
+                <p className="details-type">{this.props.orgsInfoReducer.orgDetailsReducer.type}</p>
                 <div className="details-nav-container">
                     <DetailsNavBar />
                 </div>
-                {this.props.detailsNavReducer === 0 && <div className="details-container">
-                    <h1 className="details-header">
-                        {this.props.orgsInfoReducer.orgDetailsReducer.name}
-                    </h1>
-                    <p className="details-type">{this.props.orgsInfoReducer.orgDetailsReducer.type}</p>
-                    <h3 className="details-subheader">Mission</h3>
-                    <p className="details-body">{this.props.orgsInfoReducer.orgDetailsReducer.mission}</p>
-                    <h3 className="details-subheader">Message to Volunteers</h3>
-                    <p className="details-body">{this.props.orgsInfoReducer.orgDetailsReducer.message}</p>
-                    <div className="carousel-container">
-                        <ImageCarousel />
+                {this.props.detailsNavReducer === 0 &&
+                    <div className="details-container">
+
+                        <h3 className="details-subheader">Mission</h3>
+                        <p className="details-body">{this.props.orgsInfoReducer.orgDetailsReducer.mission}</p>
+                        <h3 className="details-subheader">Message to Volunteers</h3>
+                        <p className="details-body">{this.props.orgsInfoReducer.orgDetailsReducer.message}</p>
+                        <div className="carousel-container">
+                            <ImageCarousel />
+                        </div>
                     </div>
-                </div>
                 }
                 {this.props.detailsNavReducer === 1 &&
                     <div className="details-container">
@@ -52,13 +54,13 @@ class OrganizationDetails extends Component {
                 {this.props.detailsNavReducer === 2 &&
                     <div className="location-container">
                         <h2>Address: {this.props.orgsInfoReducer.orgDetailsReducer.address}</h2>
-                        <Map address={this.props.orgsInfoReducer.orgDetailsReducer.address}/>
+                        <Map address={this.props.orgsInfoReducer.orgDetailsReducer.address} />
                         <a className="directions-link" href="http://localhost:3000/#/home">Click here for Directions in Google Maps</a>
                         {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
                     </div>
 
                 }
-            </>
+            </div>
         )
     }
 };

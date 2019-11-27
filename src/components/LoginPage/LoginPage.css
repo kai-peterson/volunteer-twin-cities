@@ -6,6 +6,8 @@
     grid-column-end: span col2-start;
     grid-row-start: 1;
     grid-row-end: span2;
+    background-color: #eaa44b;
+    color: white;
 }
 
 .login-header {
@@ -16,6 +18,7 @@
 
 .login-input-container {
     padding: 15px;
+    padding-top: 0;
     display: flex;
     justify-content: center;
 }
@@ -33,14 +36,26 @@
 .login-input {
     padding: 3px;
     font-size: 20px;
+    width: 55vw;
+    height: 27px;
 }
 
 .login-submit {
     padding: 5px;
     width: 100px;
     height: 40px;
+    background-color: #eaa44b;
+    color: white;
+    border: 2px solid white;
+    width: 55vw;
+    margin-top: 30px;
 }
 
 .login-switch-button {
     padding: 5px;
+    margin-top: 15px;
+    background-color: #eaa44b;
+    color: white;
+    border: none;
+    
 }

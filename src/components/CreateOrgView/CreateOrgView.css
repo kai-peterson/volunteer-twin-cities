@@ -36,11 +36,15 @@
 }
 
 .create-org-submit {
-    position: absolute;
+    /* position: absolute;
     bottom: 4vh;
-    left: 40vw;
+    left: 40vw; */
+    grid-column-start: 1;
+    grid-column-end: span col2-start;
     width: 20vw;
     height: 5vh;
     border: 2px solid black;
     margin: 0 auto;
+    margin-top: 5px;
+    margin-bottom: 20px;
 }

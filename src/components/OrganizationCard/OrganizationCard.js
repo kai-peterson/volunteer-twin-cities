@@ -35,10 +35,12 @@ function OrganizationCard(props) {
             <CardActionArea>
                 <CardContent onClick={handleClick}>
                     <img className="organization-image" src={props.org.image} alt="volunteer organization" />
-                    <hr/>
                     <Typography gutterBottom variant="h5" component="h2">
                         {props.org.name}
                     </Typography>
+                    {/* <hr className="orange-line"/> */}
+                    <p className="orange-line"></p>
+                    <br/>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {props.org.intro}
                     </Typography>

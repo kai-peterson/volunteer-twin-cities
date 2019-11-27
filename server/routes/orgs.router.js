@@ -2,8 +2,11 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const CronJob = require('cron').CronJob;
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT * FROM orgs ORDER BY id`;
     pool.query(queryText)
         .then((result) => {
@@ -27,7 +30,7 @@ router.get('/user', rejectUnauthenticated, (req, res) => {
         })
 });
 
-router.get('/details/:id', (req, res) => {
+router.get('/details/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT * FROM orgs WHERE id=$1`;
     pool.query(queryText, [req.params.id])
         .then((result) => {
@@ -39,7 +42,7 @@ router.get('/details/:id', (req, res) => {
         })
 });
 
-router.get('/events/:id', (req, res) => {
+router.get('/events/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT * FROM "events" WHERE "org_id"=$1`;
     pool.query(queryText, [req.params.id])
         .then((result) => {
@@ -67,7 +70,7 @@ router.get('/user/events', rejectUnauthenticated, (req, res) => {
         })
 });
 
-router.get('/event/users/:event_id', (req, res) => {
+router.get('/event/users/:event_id', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT "user".username as "name", "user".email FROM users_events 
                         JOIN "user" ON users_events.user_id="user"."id" 
                         WHERE event_id=$1`;
@@ -81,7 +84,7 @@ router.get('/event/users/:event_id', (req, res) => {
         })
 });
 
-router.delete('/event/delete/:event_id', (req, res) => {
+router.delete('/event/delete/:event_id', rejectUnauthenticated, (req, res) => {
     console.log('in event delete route', req.params);
 
     const queryTextJunction = `DELETE FROM users_events WHERE event_id=$1`;
@@ -118,7 +121,7 @@ router.get('/event/details/:id', rejectUnauthenticated, (req, res) => {
 
 router.put('/event/update/:event_id', rejectUnauthenticated, (req, res) => {
     console.log('hit update route', req.body);
-    
+
     const queryText = `UPDATE events SET "name"=$1, "event_description"=$2, "event_start"=$3, "event_end"=$4, "reqs"=$5, "address"=$6 WHERE id=$7`;
     const queryInfo = [req.body.name, req.body.description, req.body.start, req.body.end, req.body.reqs, req.body.address, req.params.event_id]
     pool.query(queryText, queryInfo)
@@ -132,7 +135,7 @@ router.put('/event/update/:event_id', rejectUnauthenticated, (req, res) => {
 });
 
 
-router.post('/event/signup/:event_id', (req, res) => {
+router.post('/event/signup/:event_id', rejectUnauthenticated, (req, res) => {
     console.log('hit');
 
     const queryText = `INSERT INTO users_events (user_id, event_id) VALUES ($1, $2)`;
@@ -159,7 +162,7 @@ router.put('/details/:id', rejectUnauthenticated, (req, res) => {
         })
 });
 
-router.get('/details/images/:id', (req, res) => {
+router.get('/details/images/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT image FROM org_images WHERE org_id=$1`;
     pool.query(queryText, [req.params.id])
         .then((result) => {
@@ -173,7 +176,7 @@ router.get('/details/images/:id', (req, res) => {
 
 router.post('/profile/create/org', rejectUnauthenticated, (req, res) => {
     const queryText = `INSERT INTO orgs ("admin_id", "name", "type", "intro", "image", "mission", "message", "address") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
-    const queryInfo = [Number(req.user.id), req.body.name, req.body.type, req.body.intro, req.body.image, req.body.mission, req.body.message, req.body.address];
+    const queryInfo = [Number(req.user.id), req.body.name, req.body.type, req.body.intro, req.body.image.image, req.body.mission, req.body.message, req.body.address];
     pool.query(queryText, queryInfo)
         .then((result) => {
             res.sendStatus(200)
@@ -197,7 +200,7 @@ router.post('/profile/create/event', rejectUnauthenticated, (req, res) => {
         })
 })
 
-router.post('/images/:id', (req, res) => {
+router.post('/images/:id', rejectUnauthenticated, (req, res) => {
     console.log('HIT THIS ROUTE');
 
     const queryText = `INSERT INTO org_images ("org_id", "image") VALUES ($1, $2)`
@@ -211,5 +214,61 @@ router.post('/images/:id', (req, res) => {
             res.sendStatus(501)
         })
 })
+
+// run every 30 minutes
+// loop through event start times, if event start time - 1 day is >= the current date then...
+// log something for now
+// eventually call the gmail api to send an email to the owner of event
+const job = new CronJob('*/5 * * * * *', function () {
+    const d = new Date();
+    // return all events in a 30 minute period 24 hours before the event_start date/time
+    const queryText = `SELECT events.id as event_id, events."name" as event_name, event_start, events.address as event_address, 
+                        orgs."name" as org_name, "user".email as owner_email FROM events 
+                        JOIN orgs ON events.org_id=orgs.id 
+                        JOIN "user" ON orgs.admin_id="user".id 
+                        WHERE event_start < NOW() + interval '1 day' + interval '6 hours' + '15 minutes' 
+                        AND event_start > NOW() + interval '1 day' + interval '5 hours' + '45 minutes'`;
+    pool.query(queryText)
+        .then((result) => {
+            const events = result.rows
+            console.log(events);
+
+            events.forEach((event) => {
+                // another query to grab all volunteers for an event
+                const queryTextUsers = `SELECT "user".username as "name", "user".email FROM users_events 
+                                            JOIN "user" ON users_events.user_id="user"."id" 
+                                            WHERE event_id=$1`
+                pool.query(queryTextUsers, [event.event_id])
+                    .then( (result) => {
+                        const volunteers = result.rows.map( (volunteer) => {
+                            return volunteer.name + ': ' + volunteer.email + '<br/>'
+                        })
+                        console.log(result.rows);
+                        console.log(volunteers);
+                        
+                        // sendgrid api call here
+                        const message = {
+                            to: 'pete9372@umn.edu',
+                            from: 'kai.m.peterson@gmail.com',
+                            subject: 'Volunteers for Upcoming Event',
+                            text: `organization: ${event.org_name}, name: ${event.event_name}, address: ${event.event_address}, volunteers: ${volunteers}`,
+                            html: `<br/><p>organization: ${event.org_name}, name: ${event.event_name}, address: ${event.event_address}, <br/> volunteers: ${volunteers}</p>`,
+                        }
+                        sgMail.send(message)
+                    })
+                // const message = {
+                //     to: 'pete9372@umn.edu',
+                //     from: 'kai.m.peterson@gmail.com',
+                //     subject: 'Volunteers for Upcoming Event',
+                //     text: `organization: ${event.org_name}, name: ${event.event_name}, address: ${event.event_address}`,
+                //     html: '<p>xD</p>',
+                // }
+                // sgMail.send(message)
+            })
+        })
+});
+console.log('After job instantiation');
+job.start();
+
 
 module.exports = router;
