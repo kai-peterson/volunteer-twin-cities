@@ -240,14 +240,14 @@ const job = new CronJob('0 */30 * * * *', function () {
                                             WHERE event_id=$1`
                 pool.query(queryTextUsers, [event.event_id])
                     .then( (result) => {
+                        // concat all volunteer info in string with html tags for email
                         let volunteers = ''
                         result.rows.forEach( (volunteer) => 
                             volunteers += `<li>Name: ${volunteer.name}<br/>Email: ${volunteer.email}</li><br/><br/>`
                         )
                         console.log(result.rows);
-                        console.log(volunteers);
                         
-                        // sendgrid api call here
+                        // sendgrid api here to send email with org, event, and volunteer info
                         const message = {
                             to: 'pete9372@umn.edu',
                             from: 'kai.m.peterson@gmail.com',
@@ -260,14 +260,6 @@ const job = new CronJob('0 */30 * * * *', function () {
                         }
                         sgMail.send(message)
                     })
-                // const message = {
-                //     to: 'pete9372@umn.edu',
-                //     from: 'kai.m.peterson@gmail.com',
-                //     subject: 'Volunteers for Upcoming Event',
-                //     text: `organization: ${event.org_name}, name: ${event.event_name}, address: ${event.event_address}`,
-                //     html: '<p>xD</p>',
-                // }
-                // sgMail.send(message)
             })
         })
 });
