@@ -10,6 +10,8 @@ const CronJob = require('cron').CronJob;
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+
+// get all Organizations for main list view
 router.get('/', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT * FROM orgs ORDER BY id`;
     pool.query(queryText)
@@ -22,6 +24,47 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// get all pending Organizations awaiting approval for admin table
+router.get('/pending', rejectUnauthenticated, (req, res) => {
+    const queryText = `SELECT * FROM pending_orgs WHERE status='pending' ORDER BY id`;
+    pool.query(queryText)
+        .then((result) => {
+            res.send(result.rows)
+        })
+        .catch((error) => {
+            console.log('error in /api/orgs route', error);
+            res.sendStatus(501)
+        })
+});
+
+router.get('/pending/details/:id', rejectUnauthenticated, (req, res) => {
+    const queryText = `SELECT * FROM pending_orgs WHERE id=$1`;
+    pool.query(queryText, [req.params.id])
+        .then((result) => {
+            console.log('successful details GET', result);
+            
+            res.send(result.rows)
+        })
+        .catch((error) => {
+            console.log('error in /api/orgs route', error);
+            res.sendStatus(501)
+        })
+});
+
+router.put('/pending/details/:id', rejectUnauthenticated, (req, res) => {
+    const queryText = `UPDATE pending_orgs SET status=$1 WHERE id=$2`;
+    pool.query(queryText, [req.body.status, req.params.id])
+        .then((result) => {
+            console.log('successful pending details PUT');
+            res.sendStatus(201)
+        })
+        .catch((error) => {
+            console.log('error in /api/orgs route', error);
+            res.sendStatus(501)
+        })
+});
+
+// get all Orgs owned by user for manage orgs list
 router.get('/user', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT id, name FROM orgs WHERE admin_id=$1 ORDER BY id`;
     pool.query(queryText, [req.user.id])
@@ -34,6 +77,7 @@ router.get('/user', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// get all details for a single Organization
 router.get('/details/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT * FROM orgs WHERE id=$1`;
     pool.query(queryText, [req.params.id])
@@ -46,6 +90,7 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// get all events for a single Organization
 router.get('/events/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT * FROM "events" WHERE "org_id"=$1`;
     pool.query(queryText, [req.params.id])
@@ -58,6 +103,7 @@ router.get('/events/:id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// get all events that a user has signed up for
 router.get('/user/events', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT "events"."name", events.event_description, events.event_start, 
                             events.event_end, events.reqs, orgs.name as org_name FROM events 
@@ -74,6 +120,7 @@ router.get('/user/events', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// get all users that have signed up for an event
 router.get('/event/users/:event_id', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT "user".username as "name", "user".email FROM users_events 
                         JOIN "user" ON users_events.user_id="user"."id" 
@@ -88,6 +135,7 @@ router.get('/event/users/:event_id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// delete a single event (from junction table and events table)
 router.delete('/event/delete/:event_id', rejectUnauthenticated, (req, res) => {
     console.log('in event delete route', req.params);
 
@@ -110,6 +158,7 @@ router.delete('/event/delete/:event_id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// get all details for a single event
 router.get('/event/details/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT * FROM "events" WHERE "id"=$1`;
     console.log('in EVENT DETAILS route', req.params.id);
@@ -123,9 +172,8 @@ router.get('/event/details/:id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// update event details
 router.put('/event/update/:event_id', rejectUnauthenticated, (req, res) => {
-    console.log('hit update route', req.body);
-
     const queryText = `UPDATE events SET "name"=$1, "event_description"=$2, "event_start"=$3, "event_end"=$4, "reqs"=$5, "address"=$6 WHERE id=$7`;
     const queryInfo = [req.body.name, req.body.description, req.body.start, req.body.end, req.body.reqs, req.body.address, req.params.event_id]
     pool.query(queryText, queryInfo)
@@ -138,10 +186,8 @@ router.put('/event/update/:event_id', rejectUnauthenticated, (req, res) => {
         })
 });
 
-
+// post user/event into junction table when user signs up
 router.post('/event/signup/:event_id', rejectUnauthenticated, (req, res) => {
-    console.log('hit');
-
     const queryText = `INSERT INTO users_events (user_id, event_id) VALUES ($1, $2)`;
     pool.query(queryText, [req.user.id, req.params.event_id])
         .then((result) => {
@@ -153,6 +199,7 @@ router.post('/event/signup/:event_id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// update a single organization's details
 router.put('/details/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `UPDATE orgs SET "name"=$1, "type"=$2, "address"=$3, "intro"=$4, "mission"=$5, "message"=$6 WHERE id=$7`;
     const queryInfo = [req.body.name, req.body.type, req.body.address, req.body.intro, req.body.mission, req.body.message, req.params.id]
@@ -166,6 +213,7 @@ router.put('/details/:id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// get all images for an organization for the carousel 
 router.get('/details/images/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT image FROM org_images WHERE org_id=$1`;
     pool.query(queryText, [req.params.id])
@@ -178,19 +226,37 @@ router.get('/details/images/:id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// add an approved org into the orgs table
 router.post('/profile/create/org', rejectUnauthenticated, (req, res) => {
     const queryText = `INSERT INTO orgs ("admin_id", "name", "type", "intro", "image", "mission", "message", "address") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
-    const queryInfo = [Number(req.user.id), req.body.name, req.body.type, req.body.intro, req.body.image.image, req.body.mission, req.body.message, req.body.address];
+    const queryInfo = [req.body.admin_id, req.body.name, req.body.type, req.body.intro, req.body.image, req.body.mission, req.body.message, req.body.address];
+    console.log('in create org route', queryInfo);
+    
     pool.query(queryText, queryInfo)
         .then((result) => {
             res.sendStatus(200)
         })
         .catch((error) => {
-            console.log('error in /api/orgs/profile/create route', error);
+            console.log('error in /api/orgs/profile/create/org route', error);
             res.sendStatus(501)
         })
 })
 
+// add an org into the pending table until approved by admin
+router.post('/profile/create/pending/org', rejectUnauthenticated, (req, res) => {
+    const queryText = `INSERT INTO pending_orgs ("admin_id", "name", "type", "intro", "image", "mission", "message", "address") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
+    const queryInfo = [Number(req.user.id), req.body.name, req.body.type, req.body.intro, req.body.image, req.body.mission, req.body.message, req.body.address];
+    pool.query(queryText, queryInfo)
+        .then((result) => {
+            res.sendStatus(200)
+        })
+        .catch((error) => {
+            console.log('error in /api/orgs/profile/create/pending/org route', error);
+            res.sendStatus(501)
+        })
+})
+
+// add an event under a single org
 router.post('/profile/create/event', rejectUnauthenticated, (req, res) => {
     const queryText = `INSERT INTO events ("org_id", "name", "event_description", "event_start", "event_end", "reqs", "address") VALUES ($1, $2, $3, $4, $5, $6, $7)`
     const queryInfo = [req.body.org_id, req.body.name, req.body.description, req.body.start, req.body.end, req.body.reqs, req.body.address];
@@ -204,6 +270,7 @@ router.post('/profile/create/event', rejectUnauthenticated, (req, res) => {
         })
 })
 
+// add an image for a single org to be used in carousel
 router.post('/images/:id', rejectUnauthenticated, (req, res) => {
     console.log('HIT THIS ROUTE');
 

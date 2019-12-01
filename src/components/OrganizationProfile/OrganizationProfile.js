@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import './OrganizationProfile.css'
 
-import { Button } from '@material-ui/core'
+import { Button } from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ImageUploadS3 from '../ImageUploadS3/ImageUploadS3';
 
 class OrganizationProfile extends Component {
     state = {
@@ -42,6 +44,13 @@ class OrganizationProfile extends Component {
         })
     }
 
+    handleImageUpload = (url) => {
+        this.setState({
+            image: url
+        })
+        this.props.dispatch({type: 'ADD_ORG_IMAGE', payload: {id: this.props.match.params.id, image: url}})
+    }
+
     handleImageClick = () => {
         this.props.dispatch({type: 'ADD_ORG_IMAGE', payload: {id: this.props.match.params.id, image: this.state.image}})
     }
@@ -72,12 +81,15 @@ class OrganizationProfile extends Component {
             <>
                 {!this.state.mode &&
                     <div className="org-profile-container">
+                        <ArrowBackIcon onClick={() => this.props.history.push('/profile/manage')} fontSize="large" className="back-icon"/>
                         <img className="profile-pic" src={this.props.user.profile_pic} alt="" />
                         <h1 className="profile-username">{this.props.orgsInfoReducer.orgDetailsReducer.name}</h1>
-                        <div className="upload-image-container">
+                        {/* <div className="upload-image-container">
                             <input onChange={this.handleImageChange} value={this.state.image} className="upload-image-input" type="text" placeholder="Image link" />
                             <Button onClick={this.handleImageClick} variant="outlined" size="small" className="upload-image-button">Add Image</Button>
-                        </div>
+                        </div> */}
+                        <ImageUploadS3 handleImageChange={this.handleImageUpload}/>
+                        <Button onClick={this.handleImageClick} variant="outlined" size="small" className="upload-image-button">Add Image</Button>
                         <h4>{this.props.orgsInfoReducer.orgDetailsReducer.type}</h4>
                         <h4>{this.props.orgsInfoReducer.orgDetailsReducer.address}</h4>
                         <h3>Events:</h3>
@@ -93,7 +105,7 @@ class OrganizationProfile extends Component {
                         <p className="create-org-subheader">{this.props.orgsInfoReducer.orgDetailsReducer.message}</p>
                         {/* <h4 className="create-org-subheader">Add image</h4> */}
                         <Button onClick={this.switchToEditMode} className="profile-button edit-button" variant="outlined">Edit</Button>
-                        {/* <pre>{JSON.stringify(props.user, null, 2)}</pre> */}
+                        {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
                     </div>
                 }
                 {this.state.mode &&

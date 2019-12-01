@@ -9,8 +9,6 @@ import './App.css';
 
 import { connect } from 'react-redux';
 
-import DrawerNav from '../DrawerNav/DrawerNav'
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import MainListView from '../MainListView/MainListView';
@@ -24,6 +22,7 @@ import ManageOrgEvents from '../ManageOrgEvents/ManageOrgEvents';
 import EventDetails from '../EventDetails/EventDetails';
 import EventSignUp from '../EventSignUp/EventSignUp';
 import Header from '../Header/Header';
+import PendingOrgDetails from '../PendingOrgDetails/PendingOrgDetails'
 
 class App extends Component {
   componentDidMount() {
@@ -60,6 +59,11 @@ class App extends Component {
               exact
               path="/home/details/:id"
               component={OrganizationDetails}
+            />
+            <ProtectedRoute
+              exact
+              path="/home/details/pending/:id"
+              component={PendingOrgDetails}
             />
             <ProtectedRoute
               exact
