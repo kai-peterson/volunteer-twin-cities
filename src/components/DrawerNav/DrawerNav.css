@@ -10,10 +10,6 @@
     height: 50px;
 }
 
-.burger-icon-container {
-    background-color: lightcyan;
-}
-
 .MuiDrawer-paperAnchorRight {
     overflow: hidden;
 }
@@ -40,5 +36,5 @@
     grid-column-start: 2;
     grid-column-end: 2;
     grid-row-start: 1;
-    padding-top: 1vh;
+    /* padding-top: 1vh; */
 }

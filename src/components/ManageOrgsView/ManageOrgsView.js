@@ -17,8 +17,8 @@ class ManageOrgsView extends Component {
     render() {
         return (
             <>
-                <h1 className="manage-orgs-header">Manage Organizations</h1>
                 <div className="organization-list-container">
+                <h1 className="manage-orgs-header">Manage Organizations</h1>
                 <OrganizationListView style={{height: '100%'}} listItems={this.props.orgsInfoReducer.setUserOrgsReducer} handleClick={this.handleClick}/>
                 </div>
         {/* <pre>{JSON.stringify(this.props.orgsInfoReducer.setUserOrgsReducer, null, 2)}</pre> */}

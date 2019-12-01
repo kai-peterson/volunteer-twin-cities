@@ -9,8 +9,6 @@ import './App.css';
 
 import { connect } from 'react-redux';
 
-import DrawerNav from '../DrawerNav/DrawerNav'
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import MainListView from '../MainListView/MainListView';
@@ -23,6 +21,8 @@ import CreateEventView from '../CreateEventView/CreateEventView';
 import ManageOrgEvents from '../ManageOrgEvents/ManageOrgEvents';
 import EventDetails from '../EventDetails/EventDetails';
 import EventSignUp from '../EventSignUp/EventSignUp';
+import Header from '../Header/Header';
+import PendingOrgDetails from '../PendingOrgDetails/PendingOrgDetails'
 
 class App extends Component {
   componentDidMount() {
@@ -33,7 +33,7 @@ class App extends Component {
     return (
       <Router>
         <div className="app-grid-container">
-          {this.props.user.id && <DrawerNav dispatch={this.props.dispatch} />}
+          {this.props.user.id && <Header />}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -59,6 +59,11 @@ class App extends Component {
               exact
               path="/home/details/:id"
               component={OrganizationDetails}
+            />
+            <ProtectedRoute
+              exact
+              path="/home/details/pending/:id"
+              component={PendingOrgDetails}
             />
             <ProtectedRoute
               exact

@@ -16,9 +16,17 @@
 }
 
 .MuiCard-root {
-    border: 2px solid black;
     min-width: 150px;
     min-height: max-content;
     height: fit-content;
     margin: 1.5vh 0;
+}
+
+.orange-line {
+    color: #eaa44b;
+    width: 50%;
+    float: left;
+    background-color: #eaa44b;
+    height: 2px;
+    margin: 0;
 }

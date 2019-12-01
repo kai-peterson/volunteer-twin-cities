@@ -15,9 +15,9 @@ class MainListView extends Component {
   render() {
     return (
       <>
-        <h1 className="main-view-header">
+        {/* <h1 className="main-view-header">
           Volunteer Twin Cities
-        </h1>
+        </h1> */}
         <div className="organization-card">
           {this.props.orgsInfoReducer.setOrgsReducer.map( (org, i) => 
             <OrganizationCard org={org} key={i}/>

@@ -5,6 +5,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import './CreateEventView.css';
 
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+
 class CreateEventView extends Component {
     state = {
         event: {
@@ -44,6 +46,7 @@ class CreateEventView extends Component {
     render() {
         return (
             <>
+                <ArrowBackIcon onClick={() => this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}`)} fontSize="large" className="back-icon" />
                 <h1 className="create-org-header">Create Event</h1>
                 <div className="create-org-container">
                     <h4 className="create-org-subheader">Name</h4>

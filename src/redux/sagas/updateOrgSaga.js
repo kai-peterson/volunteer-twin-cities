@@ -10,8 +10,18 @@ function* updateOrgSaga(action) {
   }
 }
 
+function* updatePendingStatusSaga(action) {
+  try {
+    yield axios.put(`/api/orgs/pending/details/${action.payload.id}`, action.payload)
+    yield put({type: 'GET_PENDING_ORGS'})
+  } catch (error) {
+      console.log('Error in updatePendingStatusSaga', error);
+  }
+}
+
 function* updateOrgRootSaga() {
   yield takeLatest('UPDATE_ORG', updateOrgSaga);
+  yield takeLatest('UPDATE_PENDING_STATUS', updatePendingStatusSaga);
 }
 
 export default updateOrgRootSaga;
