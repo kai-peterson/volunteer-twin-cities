@@ -9,6 +9,24 @@ const setOrgsReducer = (state = [], action) => {
     }
 };
 
+const setPendingOrgsReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_PENDING_ORGS':
+            return action.payload;
+        default:
+            return state;
+    }
+};
+
+const setPendingDetailsReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_PENDING_DETAILS':
+            return action.payload;
+        default:
+            return state;
+    }
+};
+
 const setUserOrgsReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_USER_ORGS':
@@ -41,4 +59,6 @@ export default combineReducers({
     orgDetailsReducer,
     orgImagesReducer,
     setUserOrgsReducer,
+    setPendingOrgsReducer,
+    setPendingDetailsReducer
   });

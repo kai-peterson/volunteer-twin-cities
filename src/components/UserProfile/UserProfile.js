@@ -14,10 +14,11 @@ import OrganizationListView from '../OrganizationListView/OrganizationListView'
 class UserProfile extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'GET_USER_EVENTS' })
+    this.props.dispatch({ type: 'GET_PENDING_ORGS' })
   }
 
-  handleClick = () => {
-
+  handleClick = (id) => {
+    this.props.history.push(`/home/details/pending/${id}`)
   }
 
   render() {
@@ -34,7 +35,7 @@ class UserProfile extends Component {
         {this.props.user.access_level === 1 &&
           <>
             <h2>Admin-only:<br/>Orgs Awaiting Approval</h2>
-            <OrganizationListView style={{ height: '38vh' }} listItems={this.props.eventsRootReducer.userEventsReducer} handleClick={this.handleClick} />
+            <OrganizationListView style={{ height: '38vh' }} listItems={this.props.orgsInfoReducer.setPendingOrgsReducer} handleClick={this.handleClick} />
           </>
         }
         {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}

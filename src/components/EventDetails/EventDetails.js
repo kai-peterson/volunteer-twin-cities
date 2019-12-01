@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import './EventDetails.css';
 
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+
 import OrganizationListView from '../OrganizationListView/OrganizationListView'
 
 class EventDetails extends Component {
@@ -72,6 +74,7 @@ class EventDetails extends Component {
     render() {
         return (
             <>
+             <ArrowBackIcon onClick={() => this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}/manage/events`)} fontSize="large" className="back-icon" />
                 <h1 className="event-details-org-header">{this.props.orgsInfoReducer.orgDetailsReducer.name}</h1>
                 <div className="event_details-container">
                     <h2>Volunteers Signed Up</h2>

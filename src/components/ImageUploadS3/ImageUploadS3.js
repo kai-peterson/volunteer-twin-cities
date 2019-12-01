@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios'
+import axios from 'axios';
+import { Button } from '@material-ui/core';
+
+import './ImageUploadS3.css'
 
 class ImageUploadS3 extends Component {
 
@@ -15,6 +18,9 @@ class ImageUploadS3 extends Component {
   }
   handleChange = (ev) => {
     this.setState({ success: false, url: "" });
+  }
+  handleDifferentUpload = () => {
+    this.setState({success: false, error: false})
   }
   handleUpload = (ev) => {
     let file = this.uploadInput.files[0];
@@ -48,8 +54,9 @@ class ImageUploadS3 extends Component {
         console.log("About to axios.put, options=", options);
         axios.put(signedRequest, file, options)
           .then(result => {
-            console.log("Response from s3")
+            console.log("Response from s3", result)
             this.setState({ success: true });
+            this.props.handleImageChange(url)
           })
           .catch(error => {
             console.log("Received error on axios.put, ", JSON.stringify(error));
@@ -61,31 +68,36 @@ class ImageUploadS3 extends Component {
       })
   }
   render() {
-    // const SuccessMessage = () => (
-    //   <div style={{padding:50}}>
-    //     <h3 style={{color: 'green'}}>SUCCESSFUL UPLOAD</h3>
-    //     <a href={this.state.url}>Access the file here</a>
-    //     <br/>
-    //   </div>
-    // )
-    // const ErrorMessage = () => (
-    //   <div style={{padding:50}}>
-    //     <h3 style={{color: 'red'}}>FAILED UPLOAD</h3>
-    //     <span style={{color: 'red', backgroundColor: 'black'}}>ERROR: </span>
-    //     <span>{this.state.errorMessage}</span>
-    //     <br/>
-    //   </div>
-    // )
+    const SuccessMessage = () => (
+      <div className="image-upload-container">
+        <h3 style={{color: 'green', marginBottom: '0px'}}>SUCCESSFUL UPLOAD</h3>
+        {/* <a href={this.state.url}>Access the file here</a> */}
+        <br/>
+        <Button onClick={this.handleDifferentUpload} variant="contained">Upload new image</Button>
+      </div>
+    )
+    const ErrorMessage = () => (
+      <div className="image-upload-container">
+        <h3 style={{color: 'red', marginBottom: '0px'}}>FAILED UPLOAD</h3>
+        <span style={{color: 'red', backgroundColor: 'black'}}>ERROR: </span>
+        <span>{this.state.errorMessage}</span>
+        <br/>
+        <Button onClick={this.handleDifferentUpload} variant="contained">Upload new image</Button>
+        <br/>
+      </div>
+    )
     return (
       <>
         <div className="imageUpload">
-          {/* {this.state.success ? <SuccessMessage/> : null}
-          {this.state.error ? <ErrorMessage/> : null} */}
-          <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file" />
-          <br />
-          <button onClick={this.handleUpload}>UPLOAD</button>
-        </div>
-        <div>
+          {this.state.success ? <SuccessMessage/> : null}
+          {this.state.error ? <ErrorMessage/> : null}
+          {!this.state.success && !this.state.error &&
+            <div className="image-upload-container">
+              <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file" />
+              <br />
+              <button className="upload-button" onClick={this.handleUpload}>UPLOAD</button>
+            </div>
+          }
         </div>
       </>
     );

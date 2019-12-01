@@ -36,7 +36,7 @@ class CreateOrgView extends Component {
     }
 
     handleClick = (orgObject) => {
-        this.props.dispatch({ type: 'CREATE_ORG', payload: orgObject })
+        this.props.dispatch({ type: 'CREATE_PENDING_ORG', payload: orgObject })
         this.props.history.push('/profile/manage')
     }
 
@@ -58,11 +58,10 @@ class CreateOrgView extends Component {
                     <h4 className="create-org-subheader">Message to Volunteers</h4>
                     <textarea className="create-org-textarea" onChange={(event) => this.handleChange('message', event)} type="text" placeholder="Message to volunteers (what can they expect)" value={this.state.organization.message} />
                     <h4 className="create-org-subheader">Image</h4>
-                    <ImageUploadS3 />
-                    {/* <button className="create-org-submit" onClick={() => {}}>SUBMIT</button> */}
+                    <ImageUploadS3 handleImageChange={this.handleImageChange}/>
                 </div>
                 <button className="create-org-submit" onClick={() => this.handleClick(this.state.organization)}>SUBMIT</button>
-                {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
+                {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
             </>
         );
     }

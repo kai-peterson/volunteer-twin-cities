@@ -10,8 +10,29 @@ function* getOrgsSaga(action) {
   }
 }
 
+function* getPendingOrgsSaga(action) {
+  try {
+      const pendingOrgs = yield axios.get('/api/orgs/pending')
+      yield put({type: 'SET_PENDING_ORGS', payload: pendingOrgs.data})
+  } catch (error) {
+      console.log('Error in getOrgsSaga:', error);
+  }
+}
+
+function* getPendingDetailsSaga(action) {
+  try {
+      const pendingOrgDetails = yield axios.get(`/api/orgs/pending/details/${action.payload}`)
+      yield put({type: 'SET_PENDING_DETAILS', payload: pendingOrgDetails.data[0]})
+  } catch (error) {
+      console.log('Error in getOrgsSaga:', error);
+  }
+}
+
+
 function* getRootSaga() {
   yield takeLatest('GET_ORGS', getOrgsSaga);
+  yield takeLatest('GET_PENDING_ORGS', getPendingOrgsSaga);
+  yield takeLatest('GET_PENDING_DETAILS', getPendingDetailsSaga);
 }
 
 export default getRootSaga;
