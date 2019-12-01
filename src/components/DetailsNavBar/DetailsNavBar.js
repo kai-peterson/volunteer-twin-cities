@@ -15,13 +15,11 @@ const useStyles = makeStyles({
 
 function DetailsNavBar(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
+  
   return (
     <BottomNavigation
-      value={value}
+      value={props.detailsNavReducer}
       onChange={(event, newValue) => {
-        setValue(newValue);
         props.dispatch({type: 'SET_NAV', payload: newValue})
       }}
       showLabels
@@ -34,4 +32,8 @@ function DetailsNavBar(props) {
   );
 }
 
-export default connect()(DetailsNavBar);
+const mapReduxStateToProps = reduxState => {
+  return reduxState
+}
+
+export default connect(mapReduxStateToProps)(DetailsNavBar);

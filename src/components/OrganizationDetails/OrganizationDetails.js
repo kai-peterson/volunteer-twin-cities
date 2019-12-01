@@ -60,6 +60,7 @@ class OrganizationDetails extends Component {
                     </div>
 
                 }
+                {JSON.stringify(this.props.detailsNavReducer, null, 2)}
             </div>
         )
     }

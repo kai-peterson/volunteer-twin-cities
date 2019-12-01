@@ -37,6 +37,7 @@ router.get('/pending', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// get details for a single pending organization
 router.get('/pending/details/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT * FROM pending_orgs WHERE id=$1`;
     pool.query(queryText, [req.params.id])
@@ -51,6 +52,7 @@ router.get('/pending/details/:id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// update status (upon approval/denial) of a single pending organization
 router.put('/pending/details/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `UPDATE pending_orgs SET status=$1 WHERE id=$2`;
     pool.query(queryText, [req.body.status, req.params.id])
@@ -290,52 +292,52 @@ router.post('/images/:id', rejectUnauthenticated, (req, res) => {
 // loop through event start times, if event start time - 1 day is >= the current date then...
 // log something for now
 // eventually call the gmail api to send an email to the owner of event
-// const job = new CronJob('0 */30 * * * *', function () {
-//     const d = new Date();
-//     // return all events in a 30 minute period 24 hours before the event_start date/time
-//     const queryText = `SELECT events.id as event_id, events."name" as event_name, event_start, events.address as event_address, 
-//                         orgs."name" as org_name, "user".email as owner_email FROM events 
-//                         JOIN orgs ON events.org_id=orgs.id 
-//                         JOIN "user" ON orgs.admin_id="user".id 
-//                         WHERE event_start < NOW() + interval '1 day' + interval '6 hours' + '15 minutes' 
-//                         AND event_start > NOW() + interval '1 day' + interval '5 hours' + '45 minutes'`;
-//     pool.query(queryText)
-//         .then((result) => {
-//             const events = result.rows
-//             console.log(events);
+const job = new CronJob('0 */30 * * * *', function () {
+    // return all events in a 30 minute period 24 hours before the event_start date/time
+    const queryText = `SELECT events.id as event_id, events."name" as event_name, event_start, events.address as event_address, 
+                        orgs."name" as org_name, "user".email as owner_email FROM events 
+                        JOIN orgs ON events.org_id=orgs.id 
+                        JOIN "user" ON orgs.admin_id="user".id 
+                        WHERE event_start < NOW() + interval '1 day' + interval '6 hours' + '15 minutes' 
+                        AND event_start > NOW() + interval '1 day' + interval '5 hours' + '45 minutes'`;
+    pool.query(queryText)
+        .then((result) => {
+            const events = result.rows
+            console.log(events);
 
-//             events.forEach((event) => {
-//                 // another query to grab all volunteers for an event
-//                 const queryTextUsers = `SELECT "user".username as "name", "user".email FROM users_events 
-//                                             JOIN "user" ON users_events.user_id="user"."id" 
-//                                             WHERE event_id=$1`
-//                 pool.query(queryTextUsers, [event.event_id])
-//                     .then( (result) => {
-//                         // concat all volunteer info in string with html tags for email
-//                         let volunteers = ''
-//                         result.rows.forEach( (volunteer) => 
-//                             volunteers += `<li>Name: ${volunteer.name}<br/>Email: ${volunteer.email}</li><br/><br/>`
-//                         )
-//                         console.log(result.rows);
+            events.forEach((event) => {
+                // another query to grab all volunteers for an event
+                const queryTextUsers = `SELECT "user".username as "name", "user".email FROM users_events 
+                                            JOIN "user" ON users_events.user_id="user"."id" 
+                                            WHERE event_id=$1`
+                const owner_email = event.owner_email;
+                pool.query(queryTextUsers, [event.event_id])
+                    .then( (result) => {
+                        // concat all volunteer info in string with html tags for email
+                        let volunteers = ''
+                        result.rows.forEach( (volunteer) => 
+                            volunteers += `<li>Name: ${volunteer.name}<br/>Email: ${volunteer.email}</li><br/><br/>`
+                        )
+                        console.log(result.rows);
                         
-//                         // sendgrid api here to send email with org, event, and volunteer info
-//                         const message = {
-//                             to: 'pete9372@umn.edu',
-//                             from: 'kai.m.peterson@gmail.com',
-//                             subject: `Volunteers for Upcoming Event: ${event.event_name}`,
-//                             text: `organization: ${event.org_name}, name: ${event.event_name}, address: ${event.event_address}, volunteers: ${volunteers}`,
-//                             html: `<p><b>Organization:</b> ${event.org_name}<br/><br/>
-//                                         <b>Event:</b> ${event.event_name}<br/><br/>
-//                                         <b>Event address:</b> ${event.event_address}<br/><br/>
-//                                         <b>Volunteers Signed-up:</b><br/><br/><ul>${volunteers}</ul></p>`,
-//                         }
-//                         sgMail.send(message)
-//                     })
-//             })
-//         })
-// });
-// console.log('After job instantiation');
-// job.start();
+                        // sendgrid api here to send email with org, event, and volunteer info
+                        const message = {
+                            to: owner_email,
+                            from: 'kai.m.peterson@gmail.com',
+                            subject: `Volunteers for Upcoming Event: ${event.event_name}`,
+                            text: `organization: ${event.org_name}, name: ${event.event_name}, address: ${event.event_address}, volunteers: ${volunteers}`,
+                            html: `<p><b>Organization:</b> ${event.org_name}<br/><br/>
+                                        <b>Event:</b> ${event.event_name}<br/><br/>
+                                        <b>Event address:</b> ${event.event_address}<br/><br/>
+                                        <b>Volunteers Signed-up:</b><br/><br/><ul>${volunteers}</ul></p>`,
+                        }
+                        sgMail.send(message)
+                    })
+            })
+        })
+});
+console.log('After job instantiation');
+job.start();
 
 
 module.exports = router;
