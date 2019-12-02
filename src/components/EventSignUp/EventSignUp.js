@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button } from '@material-ui/core'
 import './EventSignUp.css'
 
+import dateFormat from 'dateformat';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 class EventSignUp extends Component {
@@ -19,7 +20,7 @@ class EventSignUp extends Component {
     }
 
     handleBack = () => {
-        this.props.dispatch({ type: 'SET_NAV', payload: 1})
+        this.props.dispatch({ type: 'SET_NAV', payload: 1 })
         this.props.history.push(`/home/details/${this.props.match.params.id}`)
     }
 
@@ -27,12 +28,21 @@ class EventSignUp extends Component {
         return (
             <>
                 <ArrowBackIcon onClick={this.handleBack} viewBox="0 0 36 36" className="back-icon" />
-                <h1 className="event-details-org-header">{this.props.orgsInfoReducer.orgDetailsReducer.name}</h1>
                 <div className="event_details-container">
-                    <h1>{this.props.eventsRootReducer.eventDetailsReducer.name}</h1>
+                    <h4 className="org-profile-subheader">Event name</h4>
+                    <p className="orange-line-event"></p>
+                    <p>{this.props.eventsRootReducer.eventDetailsReducer.name}</p>
+                    <h4 className="org-profile-subheader">Description</h4>
+                    <p className="orange-line-event"></p>
                     <p>{this.props.eventsRootReducer.eventDetailsReducer.event_description}</p>
-                    <p>{this.props.eventsRootReducer.eventDetailsReducer.event_start}</p>
-                    <p>{this.props.eventsRootReducer.eventDetailsReducer.event_end}</p>
+                    <h4 className="org-profile-subheader">Start date/time</h4>
+                    <p className="orange-line-event"></p>
+                    <p>{dateFormat(this.props.eventsRootReducer.eventDetailsReducer.event_start, 'dddd, mmmm dS, yyyy @ h:MM TT')}</p>
+                    <h4 className="org-profile-subheader">End date/time</h4>
+                    <p className="orange-line-event"></p>
+                    <p>{dateFormat(this.props.eventsRootReducer.eventDetailsReducer.event_end, 'dddd, mmmm dS, yyyy @ h:MM TT')}</p>
+                    <h4 className="org-profile-subheader">Special requirements</h4>
+                    <p className="orange-line-event"></p>
                     <p>{this.props.eventsRootReducer.eventDetailsReducer.reqs}</p>
                     <Button onClick={this.handleClick} variant="contained">Sign Up</Button>
                     {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
