@@ -70,19 +70,19 @@ class ImageUploadS3 extends Component {
   render() {
     const SuccessMessage = () => (
       <div className="image-upload-container">
-        <h3 style={{color: 'green', marginBottom: '0px'}}>SUCCESSFUL UPLOAD</h3>
+        <h3 style={{color: 'green', marginBottom: '0px', marginTop: '0px'}}>SUCCESSFUL UPLOAD</h3>
         {/* <a href={this.state.url}>Access the file here</a> */}
         <br/>
-        <Button onClick={this.handleDifferentUpload} variant="contained">Upload new image</Button>
+        <Button onClick={this.handleDifferentUpload} className="upload-button">Upload new image</Button>
       </div>
     )
     const ErrorMessage = () => (
       <div className="image-upload-container">
-        <h3 style={{color: 'red', marginBottom: '0px'}}>FAILED UPLOAD</h3>
+        <h3 style={{color: 'red', marginBottom: '0px', marginTop: '0px'}}>FAILED UPLOAD</h3>
         <span style={{color: 'red', backgroundColor: 'black'}}>ERROR: </span>
         <span>{this.state.errorMessage}</span>
         <br/>
-        <Button onClick={this.handleDifferentUpload} variant="contained">Upload new image</Button>
+        <Button onClick={this.handleDifferentUpload} className="upload-button">Upload new image</Button>
         <br/>
       </div>
     )
@@ -93,9 +93,9 @@ class ImageUploadS3 extends Component {
           {this.state.error ? <ErrorMessage/> : null}
           {!this.state.success && !this.state.error &&
             <div className="image-upload-container">
-              <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file" />
+              <input className="upload-input" onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file" />
               <br />
-              <button className="upload-button" onClick={this.handleUpload}>UPLOAD</button>
+              <Button className="upload-button" onClick={this.handleUpload}>UPLOAD</Button>
             </div>
           }
         </div>

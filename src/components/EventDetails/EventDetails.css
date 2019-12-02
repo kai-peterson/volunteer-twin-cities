@@ -1,9 +1,7 @@
 .event_details-container {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    margin-top: 50px;
-    align-items: center;
+    padding: 20px;
     grid-column-start: 1;
     grid-column-end: span2;
     grid-row-start: 2;
@@ -37,4 +35,35 @@
 .input-text {
     font-size: 16px;
     padding: 3px;
+}
+
+.event_details-container > .orange-line-centered {
+    margin-bottom: 5px !important;
+}
+
+.action-buttons-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px auto 20px auto;
+}
+
+.action-buttons-container > .action-button {
+    border: 1px solid #eaa44b;
+    color: #eaa44b;
+}
+
+.orange-line-event {
+    color: #eaa44b;
+    width: 50%;
+    float: left;
+    background-color: #eaa44b;
+    min-height: 2px;
+    margin: 0;
+}
+
+.react-datepicker__input-container input {
+    border: 1px dotted #eaa44b;
+    padding: 8px;
+    font-size: 16px;
+    margin: 15px 0;
 }

@@ -1,3 +1,11 @@
-.upload-button {
-    border: 1px solid black;
+button.upload-button {
+    border: 1px solid #eaa44b;
+    background-color: #eaa44b;
+    border-radius: 2px;
+    color: white;
+    font-size: 12px;
+}
+
+.upload-input {
+    border: 1px solid #eaa44b;
 }

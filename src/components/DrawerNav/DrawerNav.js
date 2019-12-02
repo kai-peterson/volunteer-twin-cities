@@ -54,7 +54,7 @@ function DrawerNav(props) {
                 </ListItem>
                 <ListItem>
                     <Link to="/profile">
-                        <ListItemIcon><img className="list-item" src="images/profpic.jpg" alt="profile button icon" /></ListItemIcon>
+                        <ListItemIcon><img className="list-item" src="images/profpic.png" alt="profile button icon" /></ListItemIcon>
                     </Link>
                 </ListItem>
                 <div className="logout-container">

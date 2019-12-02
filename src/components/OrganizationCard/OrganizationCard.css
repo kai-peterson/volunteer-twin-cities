@@ -1,3 +1,7 @@
+.organization-card div {
+    box-shadow: unset;
+}
+
 .organization-image {
     max-height: 20vh;
     display: block;
@@ -20,6 +24,14 @@
     min-height: max-content;
     height: fit-content;
     margin: 1.5vh 0;
+}
+
+.MuiCardContent-root > h5 {
+    /* text-transform: uppercase; */
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-weight: 500;
 }
 
 .orange-line {

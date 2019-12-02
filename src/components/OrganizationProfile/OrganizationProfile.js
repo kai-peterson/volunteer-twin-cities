@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import TextareaAutosize from 'react-textarea-autosize';
 import './OrganizationProfile.css'
 
 import { Button } from '@material-ui/core';
@@ -48,11 +49,11 @@ class OrganizationProfile extends Component {
         this.setState({
             image: url
         })
-        this.props.dispatch({type: 'ADD_ORG_IMAGE', payload: {id: this.props.match.params.id, image: url}})
+        this.props.dispatch({ type: 'ADD_ORG_IMAGE', payload: { id: this.props.match.params.id, image: url } })
     }
 
     handleImageClick = () => {
-        this.props.dispatch({type: 'ADD_ORG_IMAGE', payload: {id: this.props.match.params.id, image: this.state.image}})
+        this.props.dispatch({ type: 'ADD_ORG_IMAGE', payload: { id: this.props.match.params.id, image: this.state.image } })
     }
 
     switchToEditMode = () => {
@@ -79,30 +80,41 @@ class OrganizationProfile extends Component {
     render() {
         return (
             <>
+                <ArrowBackIcon onClick={() => this.props.history.push('/profile/manage')} viewBox="0 0 36 36" className="back-icon" />
                 {!this.state.mode &&
                     <div className="org-profile-container">
-                        <ArrowBackIcon onClick={() => this.props.history.push('/profile/manage')} fontSize="large" className="back-icon"/>
                         <img className="profile-pic" src={this.props.user.profile_pic} alt="" />
-                        <h1 className="profile-username">{this.props.orgsInfoReducer.orgDetailsReducer.name}</h1>
+                        <h2 className="profile-username">{this.props.orgsInfoReducer.orgDetailsReducer.name}</h2>
+                        <div className="events-container">
+                            <h3>Events</h3>
+                            <div className="profile-buttons-container">
+                                <Button onClick={() => this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}/create/event`)} className="profile-button" variant="contained">Create</Button>
+                                <Button onClick={() => this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}/manage/events`)} className="profile-button" variant="contained">Manage</Button>
+                            </div>
+                        </div>
                         {/* <div className="upload-image-container">
                             <input onChange={this.handleImageChange} value={this.state.image} className="upload-image-input" type="text" placeholder="Image link" />
                             <Button onClick={this.handleImageClick} variant="outlined" size="small" className="upload-image-button">Add Image</Button>
                         </div> */}
-                        <ImageUploadS3 handleImageChange={this.handleImageUpload}/>
-                        <Button onClick={this.handleImageClick} variant="outlined" size="small" className="upload-image-button">Add Image</Button>
-                        <h4>{this.props.orgsInfoReducer.orgDetailsReducer.type}</h4>
-                        <h4>{this.props.orgsInfoReducer.orgDetailsReducer.address}</h4>
-                        <h3>Events:</h3>
-                        <div className="profile-buttons-container">
-                            <Button onClick={() => this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}/create/event`)} className="profile-button" variant="contained">Create</Button>
-                            <Button onClick={() => this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}/manage/events`)} className="profile-button" variant="contained">Manage</Button>
-                        </div>
-                        <h4>Intro</h4>
+                        {/* <Button onClick={this.handleImageClick} variant="outlined" size="small" className="upload-image-button">Add Image</Button> */}
+                        <h4 className="org-profile-subheader">Type</h4>
+                        <p className="orange-line"></p>
+                        <p>{this.props.orgsInfoReducer.orgDetailsReducer.type}</p>
+                        <h4 className="org-profile-subheader">Address</h4>
+                        <p className="orange-line"></p>
+                        <p>{this.props.orgsInfoReducer.orgDetailsReducer.address}</p>
+                        <h4 className="org-profile-subheader">Intro</h4>
+                        <p className="orange-line"></p>
                         <p className="create-org-subheader">{this.props.orgsInfoReducer.orgDetailsReducer.intro}</p>
-                        <h4>Mission</h4>
+                        <h4 className="org-profile-subheader">Mission</h4>
+                        <p className="orange-line"></p>
                         <p className="create-org-subheader">{this.props.orgsInfoReducer.orgDetailsReducer.mission}</p>
-                        <h4>Message</h4>
+                        <h4 className="org-profile-subheader">Message</h4>
+                        <p className="orange-line"></p>
                         <p className="create-org-subheader">{this.props.orgsInfoReducer.orgDetailsReducer.message}</p>
+                        <h4 className="org-profile-subheader">Carousel Images</h4>
+                        <p className="orange-line"></p>
+                        <ImageUploadS3 handleImageChange={this.handleImageUpload} />
                         {/* <h4 className="create-org-subheader">Add image</h4> */}
                         <Button onClick={this.switchToEditMode} className="profile-button edit-button" variant="outlined">Edit</Button>
                         {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
@@ -112,24 +124,34 @@ class OrganizationProfile extends Component {
                     <div className="org-profile-container">
                         <img className="profile-pic" src={this.props.user.profile_pic} alt="" />
                         <input onChange={(event) => this.handleChange('name', event)} className="org-edit-header" value={this.state.orgInfo.name} />
-                        <div className="upload-image-container">
+                        {/* <div className="upload-image-container">
                             <input onChange={this.handleImageChange} value={this.state.image} className="upload-image-input" type="text" placeholder="Image link" />
                             <Button onClick={this.handleImageClick} variant="outlined" size="small" className="upload-image-button">Add Image</Button>
-                        </div>
+                        </div> */}
+                        <h4 className="org-profile-subheader">Type</h4>
+                        <p className="orange-line"></p>
                         <input onChange={(event) => this.handleChange('type', event)} className="org-edit-subheader" value={this.state.orgInfo.type} />
+                        <h4 className="org-profile-subheader">Address</h4>
+                        <p className="orange-line"></p>
                         <input onChange={(event) => this.handleChange('address', event)} className="org-edit-subheader" value={this.state.orgInfo.address} />
-                        <h3>Events:</h3>
+                        {/* <h3>Events:</h3>
                         <div className="profile-buttons-container">
                             <Button className="profile-button" variant="contained">Create</Button>
                             <Button className="profile-button" variant="contained">Manage</Button>
+                        </div> */}
+                        <h4 className="org-profile-subheader">Intro</h4>
+                        <p className="orange-line"></p>
+                        <TextareaAutosize onChange={(event) => this.handleChange('intro', event)} className="org-edit-textarea" value={this.state.orgInfo.intro} />
+                        <h4 className="org-profile-subheader">Mission</h4>
+                        <p className="orange-line"></p>
+                        <TextareaAutosize onChange={(event) => this.handleChange('mission', event)} className="org-edit-textarea" value={this.state.orgInfo.mission} />
+                        <h4 className="org-profile-subheader">Message</h4>
+                        <p className="orange-line"></p>
+                        <TextareaAutosize onChange={(event) => this.handleChange('message', event)} className="org-edit-textarea" value={this.state.orgInfo.message} />
+                        <div className="cancel-save-button-container">
+                            <Button onClick={() => this.setState({ mode: !this.state.mode })} className="profile-button edit-button" variant="outlined">Cancel</Button>
+                            <Button onClick={this.switchBack} className="profile-button edit-button" variant="outlined">Save</Button>
                         </div>
-                        <h4>Intro</h4>
-                        <textarea onChange={(event) => this.handleChange('intro', event)} className="org-edit-textarea" value={this.state.orgInfo.intro} />
-                        <h4>Mission</h4>
-                        <textarea onChange={(event) => this.handleChange('mission', event)} className="org-edit-textarea" value={this.state.orgInfo.mission} />
-                        <h4>Message</h4>
-                        <textarea onChange={(event) => this.handleChange('message', event)} className="org-edit-textarea" value={this.state.orgInfo.message} />
-                        <Button onClick={this.switchBack} className="profile-button edit-button" variant="outlined">Save</Button>
                         {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
                     </div>
                 }

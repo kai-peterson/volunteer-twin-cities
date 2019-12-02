@@ -8,7 +8,7 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
     "full_name" VARCHAR (100) NOT NULL,
-    "profile_pic" VARCHAR (500) DEFAULT 'images/profpic.jpg'
+    "profile_pic" VARCHAR (500) DEFAULT 'images/profpic.png'
 );
 
 CREATE TABLE "orgs" (
