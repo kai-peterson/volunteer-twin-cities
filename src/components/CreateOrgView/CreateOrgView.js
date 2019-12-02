@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './CreateOrgView.css';
 
+import { Button } from '@material-ui/core';
+import TextareaAutosize from 'react-textarea-autosize'
+
 import ImageUploadS3 from '../ImageUploadS3/ImageUploadS3';
 
 class CreateOrgView extends Component {
@@ -52,15 +55,15 @@ class CreateOrgView extends Component {
                     <h4 className="create-org-subheader">Address</h4>
                     <input className="create-org-input" onChange={(event) => this.handleChange('address', event)} type="text" placeholder="Address" value={this.state.organization.address} />
                     <h4 className="create-org-subheader">Intro</h4>
-                    <textarea className="create-org-input" onChange={(event) => this.handleChange('intro', event)} type="text" placeholder="Short intro introducing the organization" value={this.state.organization.intro} />
+                    <TextareaAutosize className="create-org-textarea" onChange={(event) => this.handleChange('intro', event)} type="text" placeholder="Short intro introducing the organization" value={this.state.organization.intro} />
                     <h4 className="create-org-subheader">Mission Statement</h4>
-                    <textarea className="create-org-textarea" onChange={(event) => this.handleChange('mission', event)} type="text" placeholder="Mission Statement" value={this.state.organization.mission} />
+                    <TextareaAutosize className="create-org-textarea" onChange={(event) => this.handleChange('mission', event)} type="text" placeholder="Mission Statement" value={this.state.organization.mission} />
                     <h4 className="create-org-subheader">Message to Volunteers</h4>
-                    <textarea className="create-org-textarea" onChange={(event) => this.handleChange('message', event)} type="text" placeholder="Message to volunteers (what can they expect)" value={this.state.organization.message} />
+                    <TextareaAutosize className="create-org-textarea" onChange={(event) => this.handleChange('message', event)} type="text" placeholder="Message to volunteers (what can they expect)" value={this.state.organization.message} />
                     <h4 className="create-org-subheader">Image</h4>
                     <ImageUploadS3 handleImageChange={this.handleImageChange}/>
+                    <Button style={{margin: '20px auto', color: '#eaa44b', maxWidth: '20vw'}} className="profile-button" onClick={() => this.handleClick(this.state.organization)} variant="outlined">SUBMIT</Button>
                 </div>
-                <button className="create-org-submit" onClick={() => this.handleClick(this.state.organization)}>SUBMIT</button>
                 {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
             </>
         );

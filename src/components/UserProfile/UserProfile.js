@@ -22,6 +22,9 @@ class UserProfile extends Component {
     this.props.history.push(`/home/details/pending/${id}`)
   }
 
+  handleEventClick = (id) => {
+  }
+
   render() {
     return (
       <div className="profile-container">
@@ -29,7 +32,7 @@ class UserProfile extends Component {
         <h1 className="profile-username">{this.props.user.username}</h1>
         <h3 className="profile-subheader">My upcoming events</h3>
         <p className="orange-line orange-line-margins"></p>
-        <EventList listItems={this.props.eventsRootReducer.userEventsReducer} handleClick={this.handleClick} />
+        <EventList listItems={this.props.eventsRootReducer.userEventsReducer} handleClick={this.handleEventClick} />
         <div className="profile-buttons-container">
           <Button onClick={() => this.props.history.push('/profile/create')} className="profile-button" variant="contained">Create Organization</Button>
           <Button onClick={() => this.props.history.push('/profile/manage')} className="profile-button" variant="contained">Manage Organizations</Button>

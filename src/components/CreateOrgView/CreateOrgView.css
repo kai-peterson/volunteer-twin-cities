@@ -6,7 +6,7 @@
     grid-column-end: span col2-start;
     grid-row-start: 2;
     grid-row-end: 2;
-    margin-left: 8vw;
+    padding: 20px;
 }
 
 .create-org-header {
@@ -32,7 +32,7 @@
 }
 
 .create-org-textarea {
-    height: 60px;
+    min-height: 40px;
 }
 
 .create-org-submit {
@@ -47,4 +47,8 @@
     margin: 0 auto;
     margin-top: 5px;
     margin-bottom: 20px;
+}
+
+.create-org-container > .imageUpload > .image-upload-container {
+    margin-top: 0;
 }

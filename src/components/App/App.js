@@ -32,78 +32,78 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="app-grid-container">
-          {this.props.user.id && <Header />}
-          <Switch>
-            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/home" />
-            {/* Visiting localhost:3000/about will show the about page.
+          <div className="app-grid-container">
+            {this.props.user.id && <Header />}
+            <Switch>
+              {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+              <Redirect exact from="/" to="/home" />
+              {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
-            {/* For protected routes, the view could show one of several things on the same route.
+              {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
-            <ProtectedRoute
-              exact
-              path="/home"
-              component={MainListView}
-            />
-            {/* This works the same as the other protected route, except that if the user is logged in,
+              <ProtectedRoute
+                exact
+                path="/home"
+                component={MainListView}
+              />
+              {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-            <ProtectedRoute
-              exact
-              path="/profile"
-              component={UserProfile}
-            />
-            <ProtectedRoute
-              exact
-              path="/home/details/:id"
-              component={OrganizationDetails}
-            />
-            <ProtectedRoute
-              exact
-              path="/home/details/pending/:id"
-              component={PendingOrgDetails}
-            />
-            <ProtectedRoute
-              exact
-              path="/home/details/:id/event/:event_id"
-              component={EventSignUp}
-            />
-            <ProtectedRoute
-              exact
-              path="/profile/create"
-              component={CreateOrgView}
-            />
-            <ProtectedRoute
-              exact
-              path="/profile/manage"
-              component={ManageOrgsView}
-            />
-            <ProtectedRoute
-              exact
-              path="/profile/manage/organization/:id"
-              component={OrganizationProfile}
-            />
-            <ProtectedRoute
-              exact
-              path="/profile/manage/organization/:id/create/event"
-              component={CreateEventView}
-            />
-            <ProtectedRoute
-              exact
-              path="/profile/manage/organization/:id/manage/events"
-              component={ManageOrgEvents}
-            />
-            <ProtectedRoute
-              exact
-              path="/profile/manage/organization/:id/manage/events/:event_id"
-              component={EventDetails}
-            />
-            {/* If none of the other routes matched, we will show a 404. */}
-            <Route render={() => <h1>404</h1>} />
-          </Switch>
-        </div>
+              <ProtectedRoute
+                exact
+                path="/profile"
+                component={UserProfile}
+              />
+              <ProtectedRoute
+                exact
+                path="/home/details/:id"
+                component={OrganizationDetails}
+              />
+              <ProtectedRoute
+                exact
+                path="/home/details/pending/:id"
+                component={PendingOrgDetails}
+              />
+              <ProtectedRoute
+                exact
+                path="/home/details/:id/event/:event_id"
+                component={EventSignUp}
+              />
+              <ProtectedRoute
+                exact
+                path="/profile/create"
+                component={CreateOrgView}
+              />
+              <ProtectedRoute
+                exact
+                path="/profile/manage"
+                component={ManageOrgsView}
+              />
+              <ProtectedRoute
+                exact
+                path="/profile/manage/organization/:id"
+                component={OrganizationProfile}
+              />
+              <ProtectedRoute
+                exact
+                path="/profile/manage/organization/:id/create/event"
+                component={CreateEventView}
+              />
+              <ProtectedRoute
+                exact
+                path="/profile/manage/organization/:id/manage/events"
+                component={ManageOrgEvents}
+              />
+              <ProtectedRoute
+                exact
+                path="/profile/manage/organization/:id/manage/events/:event_id"
+                component={EventDetails}
+              />
+              {/* If none of the other routes matched, we will show a 404. */}
+              <Route render={() => <h1>404</h1>} />
+            </Switch>
+          </div>
       </Router>
     )
   }
