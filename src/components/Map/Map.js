@@ -5,7 +5,8 @@ import './Map.css'
 
 const mapStyles = {
     width: '100%',
-    height: '65%'
+    height: '65%',
+    maxWidth: '100%'
 };
 
 class MyMap extends Component {
@@ -66,6 +67,7 @@ class MyMap extends Component {
 
     render() {
         return (
+            <div className="map-container">
             <Map
                 google={this.props.google}
                 zoom={14}
@@ -94,6 +96,7 @@ class MyMap extends Component {
                         </div>
                     </InfoWindow>
             </Map>
+            </div>
         );
     }
 }

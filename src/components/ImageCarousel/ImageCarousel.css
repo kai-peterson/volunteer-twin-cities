@@ -1,7 +1,7 @@
 .carousel-container {
     margin: 0 auto;
     background-color: white;
-    min-height: 35vh;
+    /* min-height: 35vh; */
     display: flex;
     align-items: center;
 }
@@ -17,9 +17,9 @@
     border: 2px solid black;
 }
 
-.carousel .slide img {
+/* .carousel .slide img {
     width: unset !important;
-}
+} */
 
 .carousel .slider-wrapper.axis-horizontal .slider .slide {
     background-color: white;

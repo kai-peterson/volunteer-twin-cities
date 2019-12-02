@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './ManageOrgsView.css'
 
-import OrganizationListView from '../OrganizationListView/OrganizationListView'
+import OrganizationList from '../OrganizationList/OrganizationList';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 class ManageOrgsView extends Component {
     componentDidMount() {
@@ -17,9 +18,11 @@ class ManageOrgsView extends Component {
     render() {
         return (
             <>
+                <ArrowBackIcon onClick={() => this.props.history.push(`/profile`)} viewBox="0 0 36 36" className="back-icon" />
                 <div className="organization-list-container">
-                <h1 className="manage-orgs-header">Manage Organizations</h1>
-                <OrganizationListView style={{height: '100%'}} listItems={this.props.orgsInfoReducer.setUserOrgsReducer} handleClick={this.handleClick}/>
+                <h3 className="manage-orgs-header">Manage Organizations</h3>
+                <p className="orange-line-centered"></p>
+                <OrganizationList style={{height: '100%'}} listItems={this.props.orgsInfoReducer.setUserOrgsReducer} handleClick={this.handleClick}/>
                 </div>
         {/* <pre>{JSON.stringify(this.props.orgsInfoReducer.setUserOrgsReducer, null, 2)}</pre> */}
             </>

@@ -20,15 +20,11 @@
 }
 
 .header-image {
-    max-height: 12vw;
-    position: sticky;
-    top: 0.8vh;
-    left: 1.5vw;
+    width: 45px;
+    padding: 6px 8px;
 }
 
 .header-title {
-    padding-left: 1vw;
-    padding-right: 1vw;
-    margin: 0 auto;
-    margin-left: 15px;
+    color: white;
+
 }

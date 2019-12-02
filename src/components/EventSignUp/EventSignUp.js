@@ -26,7 +26,7 @@ class EventSignUp extends Component {
     render() {
         return (
             <>
-                <ArrowBackIcon onClick={this.handleBack} fontSize="large" className="back-icon" />
+                <ArrowBackIcon onClick={this.handleBack} viewBox="0 0 36 36" className="back-icon" />
                 <h1 className="event-details-org-header">{this.props.orgsInfoReducer.orgDetailsReducer.name}</h1>
                 <div className="event_details-container">
                     <h1>{this.props.eventsRootReducer.eventDetailsReducer.name}</h1>

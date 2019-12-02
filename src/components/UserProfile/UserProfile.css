@@ -1,29 +1,47 @@
 .profile-pic {
-    width: 150px;
-    height: 150px;
-    border-radius: 75px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    margin: 0 auto;
 }
 
 .profile-container {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     flex-direction: column;
     grid-column-start: 1;
     grid-column-end: span col2-start;
     grid-row-start: 2;
     grid-row-end: 2;
-    margin: 0 auto;
+    padding: 20px;
+    height: fit-content;
 }
 
 .profile-username {
     text-align: center;
     margin: 10px 0px;
+    margin-bottom: 20px;
 }
 
-.profile-button {
+.profile-buttons-container > .profile-button {
     max-width: 40vw;
     padding: 10px 20px !important;
-    margin: 2vh 4vw !important;
+    background-color: #eaa44b;
+}
+
+.profile-buttons-container > button > span {
+    font-size: 12px;
+    color: white;
+}
+
+.profile-buttons-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile-subheader {
+    margin-bottom: 5px;
+    text-transform: uppercase;
 }
 
 /* .profile-header {

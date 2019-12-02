@@ -5,7 +5,7 @@ import './OrganizationDetails.css'
 
 import DetailsNavBar from '../DetailsNavBar/DetailsNavBar';
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
-import OrganizationListView from '../OrganizationListView/OrganizationListView';
+import EventList from '../EventList/EventList';
 import Map from '../Map/Map'
 
 class OrganizationDetails extends Component {
@@ -23,22 +23,26 @@ class OrganizationDetails extends Component {
         this.props.history.push(`/home/details/${this.props.match.params.id}/event/${eventId}`)
     }
 
+
+
     render() {
         return (
             <div className="full-details-container">
-                <h1 className="details-header">
+                <h2 className="details-header">
                     {this.props.orgsInfoReducer.orgDetailsReducer.name}
-                </h1>
-                <p className="details-type">{this.props.orgsInfoReducer.orgDetailsReducer.type}</p>
+                    <p className="details-type">{this.props.orgsInfoReducer.orgDetailsReducer.type}</p>
+                </h2>
                 <div className="details-nav-container">
-                    <DetailsNavBar />
+                    <DetailsNavBar /> 
                 </div>
                 {this.props.detailsNavReducer === 0 &&
                     <div className="details-container">
 
                         <h3 className="details-subheader">Mission</h3>
+                        <p className="orange-line orange-line-margins"></p>
                         <p className="details-body">{this.props.orgsInfoReducer.orgDetailsReducer.mission}</p>
                         <h3 className="details-subheader">Message to Volunteers</h3>
+                        <p className="orange-line orange-line-margins"></p>
                         <p className="details-body">{this.props.orgsInfoReducer.orgDetailsReducer.message}</p>
                         <div className="carousel-container">
                             <ImageCarousel />
@@ -47,20 +51,23 @@ class OrganizationDetails extends Component {
                 }
                 {this.props.detailsNavReducer === 1 &&
                     <div className="details-container">
-                        <h1 style={{ height: 'fit-content' }}>Events</h1>
-                        <OrganizationListView style={{ height: 'fit-content', gridRowStart: 2, gridRowEnd: 2, gridColumnStart: 1, gridColumnEnd: 'span2' }} listItems={this.props.eventsRootReducer.eventsReducer} handleClick={this.handleClick} />
+                        <h3 className="details-subheader">Events</h3>
+                        <p className="orange-line orange-line-margins"></p>
+                        <EventList style={{ height: 'fit-content', gridColumnStart: 1, gridColumnEnd: 'span2' }} listItems={this.props.eventsRootReducer.eventsReducer} handleClick={this.handleClick} />
                     </div>
                 }
                 {this.props.detailsNavReducer === 2 &&
-                    <div className="location-container">
-                        <h2>Address: {this.props.orgsInfoReducer.orgDetailsReducer.address}</h2>
+                    <div className="details-container">
+                        <h3 className="details-subheader">Location</h3>
+                        <p className="orange-line orange-line-margins"></p>
                         <Map address={this.props.orgsInfoReducer.orgDetailsReducer.address} />
-                        <a className="directions-link" href="http://localhost:3000/#/home">Click here for Directions in Google Maps</a>
+                        <h4 className="address-header">{this.props.orgsInfoReducer.orgDetailsReducer.name}<p className="address-subheader">{this.props.orgsInfoReducer.orgDetailsReducer.address}</p></h4>
+                        <a target="_blank" rel="noopener noreferrer" className="directions-link" href={`https://www.google.com/maps/dir/?api=1&destination=${this.props.orgsInfoReducer.orgDetailsReducer.address.replace(/ /g, '+').replace(/,/g, '%2C')}`}>Click here for Directions in Google Maps</a>
                         {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
                     </div>
 
                 }
-                {JSON.stringify(this.props.detailsNavReducer, null, 2)}
+                {/* {JSON.stringify(this.props.eventsRootReducer, null, 2)} */}
             </div>
         )
     }

@@ -1,0 +1,22 @@
+.map-container > div {
+    width: 335px !important;
+    height: 75% !important;
+    max-height: 400px
+}
+
+.map-container > div > div {
+    height: 100% !important;
+}
+
+.map-container {
+    height: 400px;
+    margin-top: 10px;
+}
+
+.gm-style .gm-style-mtc label, .gm-style .gm-style-mtc div {
+    visibility: hidden;
+}
+
+div.gm-svpc {
+    visibility: hidden;
+}

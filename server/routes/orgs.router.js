@@ -68,7 +68,7 @@ router.put('/pending/details/:id', rejectUnauthenticated, (req, res) => {
 
 // get all Orgs owned by user for manage orgs list
 router.get('/user', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT id, name FROM orgs WHERE admin_id=$1 ORDER BY id`;
+    const queryText = `SELECT id, name, type, intro FROM orgs WHERE admin_id=$1 ORDER BY id`;
     pool.query(queryText, [req.user.id])
         .then((result) => {
             res.send(result.rows)

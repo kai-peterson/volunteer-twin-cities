@@ -5,7 +5,7 @@ import './ManageOrgEvents.css'
 
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-import OrganizationListView from '../OrganizationListView/OrganizationListView'
+import EventList from '../EventList/EventList'
 
 class ManageOrgsView extends Component {
     componentDidMount() {
@@ -19,10 +19,11 @@ class ManageOrgsView extends Component {
     render() {
         return (
             <>
-                <ArrowBackIcon onClick={() => this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}`)} fontSize="large" className="back-icon" />
-                <h1 className="manage-orgs-header" style={this.props.style}>Manage Events</h1>
+                <ArrowBackIcon onClick={() => this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}`)} viewBox="0 0 36 36" className="back-icon" />
                 <div className="organization-list-container">
-                    <OrganizationListView style={{ height: '100%' }} listItems={this.props.eventsRootReducer.eventsReducer} handleClick={this.handleClick} />
+                    <h3 className="manage-orgs-header">Manage Events</h3>
+                    <p className="orange-line-centered"></p>
+                    <EventList style={{ height: '100%' }} listItems={this.props.eventsRootReducer.eventsReducer} handleClick={this.handleClick} />
                 </div>
                 {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
             </>

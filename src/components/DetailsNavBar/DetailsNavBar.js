@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import DetailsIcon from '@material-ui/icons/Details';
+import InfoIcon from '@material-ui/icons/Info';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 
 function DetailsNavBar(props) {
   const classes = useStyles();
-  
+
   return (
     <BottomNavigation
       value={props.detailsNavReducer}
@@ -25,7 +25,7 @@ function DetailsNavBar(props) {
       showLabels
       className={classes.root}
     >
-      <BottomNavigationAction value={0} disableRipple label="Details" icon={<DetailsIcon />} />
+      <BottomNavigationAction value={0} disableRipple label="Details" icon={<InfoIcon />} />
       <BottomNavigationAction value={1} disableRipple label="Events" icon={<EventAvailableIcon />} />
       <BottomNavigationAction value={2} disableRipple label="Location" icon={<LocationOnIcon />} />
     </BottomNavigation>
