@@ -3,6 +3,27 @@ body {
     margin: 0px;
 }
 
+@media only screen and (min-width: 600px) {
+    html {
+        font-size: 130% !important;
+    }
+    span {
+        font-size: 85% !important;
+    }
+    h3, h4, h5, h6, .MuiTypography-h6 {
+        font-size: 100% !important;
+    }
+    .details-type {
+        font-size: 55% !important;
+    }
+    .details-container > div {
+        max-width: unset;
+    }
+    .profile-container > div {
+        max-width: unset;
+    }
+}
+
 body::-webkit-scrollbar {
     width: 0 !important;
 }
@@ -25,8 +46,26 @@ input {
     border: 1px solid black;
 }
 
-.app-grid-container {
-    display: grid;
-    grid-template-columns: 80vw 20vw;
-    grid-template-rows: 8vh 92vh;
+@media only screen and (min-width: 600px) {
+    .app-grid-container {
+        display: grid;
+        grid-template-columns: 480px 120px;
+        grid-template-rows: 8vh 92vh;
+    }
+
+    .app-outer-container {
+        max-width: 600px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .app-grid-container {
+        display: grid;
+        grid-template-columns: 80vw 20vw;
+        grid-template-rows: 8vh 92vh;
+    }
 }

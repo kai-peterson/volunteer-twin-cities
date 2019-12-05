@@ -1,17 +1,38 @@
-.map-container > div {
-    width: 335px !important;
-    height: 75% !important;
-    max-height: 400px
+@media only screen and (min-width: 600px) {
+    .map-container > div {
+        width: 560px !important;
+        max-height: 500px
+    }
+    .map-container {
+        height: 500px;
+        margin-top: 10px;
+    } 
 }
+@media only screen and (max-width: 600px) {
+    .map-container > div {
+        width: 335px !important;
+        max-height: 400px
+    }
+    .map-container {
+        height: 400px;
+        margin-top: 10px;
+    } 
+    
+}
+
+/* .map-container > div {
+    width: 335px !important;
+    max-height: 400px
+} */
 
 .map-container > div > div {
     height: 100% !important;
 }
 
-.map-container {
+/* .map-container {
     height: 400px;
     margin-top: 10px;
-}
+} */
 
 .gm-style .gm-style-mtc label, .gm-style .gm-style-mtc div {
     visibility: hidden;

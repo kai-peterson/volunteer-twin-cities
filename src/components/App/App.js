@@ -32,6 +32,7 @@ class App extends Component {
   render() {
     return (
       <Router>
+        <div className="app-outer-container">
           <div className="app-grid-container">
             {this.props.user.id && <Header />}
             <Switch>
@@ -104,6 +105,7 @@ class App extends Component {
               <Route render={() => <h1>404</h1>} />
             </Switch>
           </div>
+        </div>
       </Router>
     )
   }
