@@ -33,6 +33,7 @@ class LoginPage extends Component {
 
   render() {
     return (
+      <div className="login-outer-container">
       <div className="login-container">
         {this.props.errors.loginMessage && (
           <h2
@@ -89,6 +90,7 @@ class LoginPage extends Component {
             Register
           </button>
         </center>
+      </div>
       </div>
     );
   }

@@ -2,12 +2,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    grid-column: 1;
-    grid-column-end: span col2-start;
+    grid-column: 2;
+    grid-column-end: span col3-start;
     grid-row-start: 1;
     grid-row-end: span2;
     background-color: #eaa44b;
     color: white;
+    min-height: 100vh;
+    max-width: 600px;
+}
+
+.login-outer-container {
+    background-color: #eaa44b;
 }
 
 .login-header {

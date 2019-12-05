@@ -1,7 +1,7 @@
 .header-container {
     display: flex;
-    grid-column-start: 1;
-    grid-column-end: span2;
+    grid-column-start: 2;
+    grid-column-end: span3;
     grid-row-start: 1;
     grid-row-end: 1;
     justify-content: space-around;

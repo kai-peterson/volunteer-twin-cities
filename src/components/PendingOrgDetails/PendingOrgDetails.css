@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    grid-column-start: 1;
+    grid-column-start: 2;
     grid-column-end: span col2;
     grid-row-start: 2;
     grid-row-end: 2;

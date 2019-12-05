@@ -25,20 +25,24 @@ input {
     border: 1px solid black;
 }
 
-/* @media only screen and (max-width: 600px) { */
+@media only screen and (max-width: 600px) { */
     .app-grid-container {
-        grid-template-columns: 80vw 20vw;
+        display: inline-grid;
+        grid-template-columns: 0vw 80vw 20vw 0vw;
         grid-template-rows: 8vh 92vh;
     }
-/* } */
+}
 
-/* @media only screen and (min-width: 600px) {
+@media only screen and (min-width: 600px) {
     .app-grid-container {
-        grid-template-columns: auto 480px 120px auto;
+        display: inline-grid;
+        grid-template-columns: 480px 120px;
         grid-template-rows: 8vh 92vh;
+        margin: 0 auto;
     }
-} */
-/* 
+}
+
 .app-outer-container {
     max-width: 600px;
-} */
+    margin: 0 auto;
+}

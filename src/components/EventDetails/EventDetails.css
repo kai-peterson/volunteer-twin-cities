@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    grid-column-start: 1;
-    grid-column-end: span2;
+    grid-column-start: 2;
+    grid-column-end: span3;
     grid-row-start: 2;
     grid-row-end: 2;
 }

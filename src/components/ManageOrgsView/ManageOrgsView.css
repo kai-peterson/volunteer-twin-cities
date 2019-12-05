@@ -1,8 +1,8 @@
 .organization-list-container {
     display: flex;
     flex-direction: column;
-    grid-column-start: 1;
-    grid-column-end: span col2-start;
+    grid-column-start: 2;
+    grid-column-end: span col3-start;
     grid-row-start: 2;
     grid-row-end: 2;
     justify-content: center;

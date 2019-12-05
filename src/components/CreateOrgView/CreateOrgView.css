@@ -2,15 +2,15 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    grid-column-start: 1;
-    grid-column-end: span col2-start;
+    grid-column-start: 2;
+    grid-column-end: span col3-start;
     grid-row-start: 2;
     grid-row-end: 2;
     padding: 20px;
 }
 
 .create-org-header {
-    /* grid-column-start: 1;
+    /* grid-column-start: 2;
     grid-column-end: 1;
     grid-row-start: 1;
     grid-row-end: 1; */
@@ -39,8 +39,8 @@
     /* position: absolute;
     bottom: 4vh;
     left: 40vw; */
-    grid-column-start: 1;
-    grid-column-end: span col2-start;
+    grid-column-start: 2;
+    grid-column-end: span col3-start;
     width: 20vw;
     height: 5vh;
     border: 2px solid black;
