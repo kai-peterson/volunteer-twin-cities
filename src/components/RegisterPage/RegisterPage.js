@@ -34,6 +34,7 @@ class RegisterPage extends Component {
 
   render() {
     return (
+      <div className="login-container-fullwidth">
       <div className="login-container">
         {this.props.errors.registrationMessage && (
           <h2
@@ -102,6 +103,7 @@ class RegisterPage extends Component {
             Login
           </button>
         </center>
+      </div>
       </div>
     );
   }
