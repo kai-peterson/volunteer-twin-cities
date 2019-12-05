@@ -25,8 +25,20 @@ input {
     border: 1px solid black;
 }
 
-.app-grid-container {
-    display: inline-grid;
-    grid-template-columns: 80vw 20vw;
-    grid-template-rows: 8vh 92vh;
-}
+/* @media only screen and (max-width: 600px) { */
+    .app-grid-container {
+        grid-template-columns: 80vw 20vw;
+        grid-template-rows: 8vh 92vh;
+    }
+/* } */
+
+/* @media only screen and (min-width: 600px) {
+    .app-grid-container {
+        grid-template-columns: auto 480px 120px auto;
+        grid-template-rows: 8vh 92vh;
+    }
+} */
+/* 
+.app-outer-container {
+    max-width: 600px;
+} */
