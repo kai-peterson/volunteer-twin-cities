@@ -7,7 +7,6 @@ CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
-    "full_name" VARCHAR (100) NOT NULL,
     "profile_pic" VARCHAR (500) DEFAULT 'images/profpic.png'
 );
 
@@ -23,13 +22,26 @@ CREATE TABLE "orgs" (
   "address" varchar
 );
 
+CREATE TABLE "pending_orgs" (
+  "id" SERIAL PRIMARY KEY,
+  "admin_id" int REFERENCES "user",
+  "name" varchar,
+  "type" varchar,
+  "intro" varchar,
+  "image" varchar,
+  "mission" varchar,
+  "message" varchar,
+  "address" varchar,
+  "status" varchar(10)
+);
+
 CREATE TABLE "events" (
   "id" SERIAL PRIMARY KEY,
   "org_id" int REFERENCES "orgs",
   "event_name" varchar,
   "event_description" varchar,
-  "event_start" varchar,
-  "event_end" varchar,
+  "event_start" timestamp without time zone,
+  "event_end" timestamp without time zone,
   "reqs" varchar
 );
 
