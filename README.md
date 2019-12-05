@@ -29,8 +29,8 @@ coming soon...
 #### APIs, styling, and other tech
 - AWS S3 (image upload)
 - Google API
- - Geocoding API
- - JavaScript Maps API
+ --Geocoding API
+ --JavaScript Maps API
 - SendGrid API (sending emails)
 - Cron (server-side time-based checks)
 - Material-ui
