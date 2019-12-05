@@ -26,7 +26,7 @@ input {
 }
 
 .app-grid-container {
-    display: inline-grid;
+    display: grid;
     grid-template-columns: 80vw 20vw;
     grid-template-rows: 8vh 92vh;
 }
