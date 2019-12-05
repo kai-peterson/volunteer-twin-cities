@@ -18,7 +18,7 @@ class ManageOrgsView extends Component {
     render() {
         return (
             <>
-                <ArrowBackIcon onClick={() => this.props.history.push(`/profile`)} viewBox="0 0 36 36" className="back-icon" />
+                <ArrowBackIcon onClick={() => this.props.history.push(`/profile`)} viewBox="0 0 48 48" className="back-icon" />
                 <div className="organization-list-container">
                 <h3 className="manage-orgs-header">Manage Organizations</h3>
                 <p className="orange-line-centered"></p>

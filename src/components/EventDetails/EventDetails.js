@@ -81,7 +81,7 @@ class EventDetails extends Component {
     render() {
         return (
             <>
-                <ArrowBackIcon onClick={() => this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}/manage/events`)} viewBox="0 0 36 36" className="back-icon" />
+                <ArrowBackIcon onClick={() => this.props.history.push(`/profile/manage/organization/${this.props.match.params.id}/manage/events`)} viewBox="0 0 48 48" className="back-icon" />
                 <div className="event_details-container">
                     {/* <h1 className="event-details-org-header">{this.props.orgsInfoReducer.orgDetailsReducer.name}</h1> */}
                     <h3 className="manage-orgs-header">Volunteers Signed Up</h3>

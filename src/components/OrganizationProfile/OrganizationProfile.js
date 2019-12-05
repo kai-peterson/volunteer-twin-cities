@@ -80,7 +80,7 @@ class OrganizationProfile extends Component {
     render() {
         return (
             <>
-                <ArrowBackIcon onClick={() => this.props.history.push('/profile/manage')} viewBox="0 0 36 36" className="back-icon" />
+                <ArrowBackIcon onClick={() => this.props.history.push('/profile/manage')} viewBox="0 0 48 48" className="back-icon" />
                 {!this.state.mode &&
                     <div className="org-profile-container">
                         <img className="profile-pic" src={this.props.user.profile_pic} alt="" />
