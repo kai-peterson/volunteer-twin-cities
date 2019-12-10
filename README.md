@@ -1,6 +1,6 @@
 # Volunteer Twin Cities
 
-Deployed site: https://volunteer-twin-cities.herokuapp.com/#/home
+Deployed site: https://volunteer-twin-cities.herokuapp.com
 - Click the link above for a fully-functional version of the app
 - Styled mobile-first 
   - Right-click, inspect, and click phone icon left of elements and console tabs
