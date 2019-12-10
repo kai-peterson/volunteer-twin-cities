@@ -6,7 +6,10 @@
     .map-container {
         height: 500px;
         margin-top: 10px;
-    } 
+    }
+    .event_details-container > div > .map-container > div {
+        width: 530px !important
+    }
 }
 @media only screen and (max-width: 600px) {
     .map-container > div {
@@ -17,6 +20,9 @@
         height: 400px;
         margin-top: 10px;
     } 
+    .event_details-container > div > .map-container > div {
+        width: 300px !important
+    }
     
 }
 

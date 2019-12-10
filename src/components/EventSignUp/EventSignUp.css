@@ -1,12 +1,11 @@
 .event_details-container > div > .map-container > div {
-    width: 300px !important;
     height: 75% !important;
     max-height: 300px;
-    position: absolute;
-    left: 10vw;
 }
 
 .event_details-container > div > .map-container {
     max-height: 300px;
     margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
 }
