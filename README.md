@@ -1,6 +1,7 @@
 # Volunteer Twin Cities
 
-Deployed site: coming soon...
+Deployed site: coming 12/11/19
+- Currently fixing some routes that broke on deploy and entering data...
 - Click the link above for a fully-functional version of the app
 
 
