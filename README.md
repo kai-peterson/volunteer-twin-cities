@@ -2,7 +2,9 @@
 
 Deployed site: https://volunteer-twin-cities.herokuapp.com/#/home
 - Click the link above for a fully-functional version of the app
-- Styled mobile-first (right-click, inspect, and click phone icon left of elements and console tabs)
+- Styled mobile-first 
+  - Right-click, inspect, and click phone icon left of elements and console tabs
+  - Content should all fit w/o horizontal scrolling; double click phone icon if it doesn't to fix
 
 
 ## Description
