@@ -41,7 +41,7 @@ class UserProfile extends Component {
           <>
             <h2>Admin-only:<br />Orgs Awaiting Approval</h2>
             <OrganizationList listItems={this.props.orgsInfoReducer.setPendingOrgsReducer} handleClick={this.handleClick} />
-            <pre>{JSON.stringify(this.props.orgsInfoReducer, null, 2)}</pre>
+            {/* <pre>{JSON.stringify(this.props.orgsInfoReducer, null, 2)}</pre> */}
           </>
         }
         {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
