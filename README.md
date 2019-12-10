@@ -7,7 +7,7 @@ Deployed site: https://volunteer-twin-cities.herokuapp.com/#/home
 
 ## Description
 
-A volunteer app for local Twin Cities residents to find volunteer opportunities. Users can create organizations, add or edit events, manage and sign up for events, and view volunteers who’ve signed up
+A mobile-first volunteer app for local Twin Cities residents to find volunteer opportunities. Users can create organizations, add or edit events, manage and sign up for events, and view volunteers who’ve signed up
 
 Features:
 - Browse Organizations
