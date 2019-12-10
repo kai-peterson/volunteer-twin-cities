@@ -12,10 +12,6 @@ coming soon...
 Features:
 - coming soon...
 
-## Screen Shots
-
-coming soon...
-
 ### Tech
 
 #### Stack
