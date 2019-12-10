@@ -6,8 +6,7 @@ Deployed site: coming soon...
 
 ## Description
 
-coming soon...
-
+A volunteer app for local Twin Cities residents to find volunteer opportunities. Users can create organizations, add or edit events, manage and sign up for events, and view volunteers who’ve signed up
 
 Features:
 - coming soon...
