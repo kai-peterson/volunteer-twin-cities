@@ -289,7 +289,7 @@ router.post('/images/:id', rejectUnauthenticated, (req, res) => {
 })
 
 // run every 30 minutes
-// loop through event start times, if event start time - 1 day is >= the current date then...
+// loop through event start times, if event start time - 1 day is <= the current date then...
 // log something for now
 // eventually call the gmail api to send an email to the owner of event
 const job = new CronJob('0 */30 * * * *', function () {
@@ -298,7 +298,7 @@ const job = new CronJob('0 */30 * * * *', function () {
                         orgs."name" as org_name, "user".email as owner_email FROM events 
                         JOIN orgs ON events.org_id=orgs.id 
                         JOIN "user" ON orgs.admin_id="user".id 
-                        WHERE event_start < NOW() + interval '1 day' + interval '6 hours' + '15 minutes' 
+                        WHERE event_start <= NOW() + interval '1 day' + interval '6 hours' + '15 minutes' 
                         AND event_start > NOW() + interval '1 day' + interval '5 hours' + '45 minutes'`;
     pool.query(queryText)
         .then((result) => {
