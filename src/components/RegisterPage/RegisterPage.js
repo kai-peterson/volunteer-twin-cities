@@ -7,7 +7,7 @@ class RegisterPage extends Component {
     username: '',
     password: '',
     email: '',
-  };
+  }; 
 
   registerUser = (event) => {
     event.preventDefault();

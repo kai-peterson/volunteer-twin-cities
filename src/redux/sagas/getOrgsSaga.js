@@ -12,6 +12,8 @@ function* getOrgsSaga(action) {
 
 function* getPendingOrgsSaga(action) {
   try {
+      // console.log('hit pending orgs saga');
+      
       const pendingOrgs = yield axios.get('/api/orgs/pending')
       yield put({type: 'SET_PENDING_ORGS', payload: pendingOrgs.data})
   } catch (error) {

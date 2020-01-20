@@ -23,49 +23,54 @@ class ImageUploadS3 extends Component {
     this.setState({success: false, error: false})
   }
   handleUpload = (ev) => {
-    let file = this.uploadInput.files[0];
+    if (this.uploadInput.files[0]) {
+      let file = this.uploadInput.files[0];
 
-    // Split the filename to get the name and type
-    let fileParts = this.uploadInput.files[0].name.split('.');
-    let fileName = fileParts[0];
-    let fileType = fileParts[1];
-    console.log("Preparing the upload");
-    console.log("Filename=", fileName);
-    console.log("Filetype=", fileType);
-    axios.post('/s3Controller', {
-      fileName: fileName,
-      fileType: fileType
-    })
-      .then(response => {
-        const returnData = response.data.data.returnData;
-        const signedRequest = returnData.signedRequest;
-        const url = returnData.url;
-        this.setState({ url: url })
-        console.log("Recieved a signed request ", signedRequest);
-        console.log('returnData for axios.post to /sign_s3:', returnData);
-        const options = {
-          headers: {
-            'Content-Type': fileType,
-            'Access-Control-Allow-Origin': true,
-          }
-        };
-        console.log("About to axios.put, signedRequest=", signedRequest);
-        console.log("About to axios.put, file=", file);
-        console.log("About to axios.put, options=", options);
-        axios.put(signedRequest, file, options)
-          .then(result => {
-            console.log("Response from s3", result)
-            this.setState({ success: true });
-            this.props.handleImageChange(url)
-          })
-          .catch(error => {
-            console.log("Received error on axios.put, ", JSON.stringify(error));
-            alert("ERROR ", JSON.stringify(error));
-          })
+      // Split the filename to get the name and type
+      let fileParts = this.uploadInput.files[0].name.split('.');
+      let fileName = fileParts[0];
+      let fileType = fileParts[1];
+      console.log("Preparing the upload");
+      console.log("Filename=", fileName);
+      console.log("Filetype=", fileType);
+      axios.post('/s3Controller', {
+        fileName: fileName,
+        fileType: fileType
       })
-      .catch(error => {
-        alert(JSON.stringify(error));
-      })
+        .then(response => {
+          const returnData = response.data.data.returnData;
+          const signedRequest = returnData.signedRequest;
+          const url = returnData.url;
+          this.setState({ url: url })
+          console.log("Recieved a signed request ", signedRequest);
+          console.log('returnData for axios.post to /sign_s3:', returnData);
+          const options = {
+            headers: {
+              'Content-Type': fileType,
+              'Access-Control-Allow-Origin': true,
+            }
+          };
+          console.log("About to axios.put, signedRequest=", signedRequest);
+          console.log("About to axios.put, file=", file);
+          console.log("About to axios.put, options=", options);
+          axios.put(signedRequest, file, options)
+            .then(result => {
+              console.log("Response from s3", result)
+              this.setState({ success: true });
+              this.props.handleImageChange(url)
+            })
+            .catch(error => {
+              console.log("Received error on axios.put, ", JSON.stringify(error));
+              alert("ERROR ", JSON.stringify(error));
+            })
+        })
+        .catch(error => {
+          alert(JSON.stringify(error));
+        })
+    }
+    else {
+      alert('Please choose an image to upload!')
+    }
   }
   render() {
     const SuccessMessage = () => (
@@ -99,6 +104,9 @@ class ImageUploadS3 extends Component {
             </div>
           }
         </div>
+        {/* {JSON.stringify(this.state, null, 2)} */}
+        {/* {JSON.stringify(this.uploadInput, null, 2)} */}
+        {/* {this.uploadInput && this.uploadInput.files} */}
       </>
     );
   }

@@ -45,11 +45,25 @@ class CreateOrgView extends Component {
         this.props.history.push('/profile/manage')
     }
 
+    handlePresentation = () => {
+        this.setState({
+            organization: {
+                name: 'Big Brothers Big Sisters Twin Cities',
+                type: 'Nonprofit',
+                address: '2550 University Ave W, St Paul MN, 55114',
+                intro: 'Time to make a big difference. Time to ignite the power and promise of Twin Cities youth. We need passionate people like you.',
+                mission: 'Create and support mentoring relationships that ignite the power and promise of youth.',
+                message: ' We use evidence-based criteria to make and support safe, life-changing matches that protect the physical and emotional well-being of our Littles. We put safety first, always ensuring we have systems, processes and personnel in place to properly support program participants and staff.',
+                image: '',
+            }
+        })
+    }
+
     render() {
         return (
             <>
                 <div className="create-org-container">
-                    <h1 style={{marginBottom: '5px', marginTop: '0'}} className="create-org-header">Create Organization</h1>
+                    <h1 onClick={this.handlePresentation} style={{ marginBottom: '5px', marginTop: '0' }} className="create-org-header">Create Organization</h1>
                     <h4 className="create-org-subheader">Name</h4>
                     <input className="create-org-input" onChange={(event) => this.handleChange('name', event)} type="text" placeholder="Organization Name" value={this.state.organization.name} />
                     <h4 className="create-org-subheader">Type</h4>
@@ -63,8 +77,8 @@ class CreateOrgView extends Component {
                     <h4 className="create-org-subheader">Message to Volunteers</h4>
                     <TextareaAutosize className="create-org-textarea" onChange={(event) => this.handleChange('message', event)} type="text" placeholder="Message to volunteers (what can they expect)" value={this.state.organization.message} />
                     <h4 className="create-org-subheader">Image</h4>
-                    <ImageUploadS3 handleImageChange={this.handleImageChange}/>
-                    <Button style={{margin: '20px auto', color: '#eaa44b', maxWidth: '20vw'}} className="profile-button" onClick={() => this.handleClick(this.state.organization)} variant="outlined">SUBMIT</Button>
+                    <ImageUploadS3 handleImageChange={this.handleImageChange} />
+                    <Button style={{ margin: '20px auto', color: '#eaa44b', maxWidth: '20vw' }} className="profile-button" onClick={() => this.handleClick(this.state.organization)} variant="outlined">SUBMIT</Button>
                 </div>
                 {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
             </>

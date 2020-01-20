@@ -18,10 +18,10 @@ class EventSignUp extends Component {
     }
 
     handleClick = () => {
-        let confirm = window.confirm('Are you sure?')
-        if (confirm) {
+        // let confirm = window.confirm('Are you sure?')
+        // if (confirm) {
             this.props.dispatch({ type: 'ADD_USER_EVENT', payload: this.props.match.params.event_id })
-        }
+        // }
     }
 
     handleBack = () => {
